@@ -24,7 +24,13 @@ If container 1 wants to talk to Container 2 , they will go through local host
 Pods of different container communicate each other through bridge 
 
 **Node to Node Communication**
+
+
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/8193be1f-da93-4d9e-a8ea-5031e71d9e97" />
+
+
+
+
 Happens thorugh CNI 
 
 **Network Namespace**
