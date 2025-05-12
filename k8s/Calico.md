@@ -63,6 +63,10 @@ Overlay networking is a virtual network layer built on top of an existing physic
 
    Calico creates veth one end goes to pod networking namespace as eth0 and other end stays in host networking namespace, connected to a calico bridge or device .
 
+   ![Diagram Description](https://www.google.com/url?sa=i&url=https%3A%2F%2Fm.youtube.com%2Fwatch%3Fv%3DvOo__3GqyxM&psig=AOvVaw3NAOGCaPpCKpthwI5jxFFH&ust=1747125829355000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIDRhIvFnY0DFQAAAAAdAAAAABAK)
+
+
+
    
 
 
