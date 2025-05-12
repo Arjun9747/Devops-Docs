@@ -17,6 +17,23 @@ Calico is a networking (security) solutions for K8s. It provides networking, n/w
 2. You want high performance scalable netwrorking
 3. Need integration with cloud or on-prem routing via BGP
 
+##Namespaces
+Calico System namespace 
+Calico API Server
+tigeria Operator
+
+Calico system namespace is the main namespace where calico components are run 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
