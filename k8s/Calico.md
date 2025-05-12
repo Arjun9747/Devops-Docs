@@ -63,7 +63,32 @@ Overlay networking is a virtual network layer built on top of an existing physic
 
    Calico creates veth one end goes to pod networking namespace as eth0 and other end stays in host networking namespace, connected to a calico bridge or device .
 
-   ![Diagram Description](https://www.google.com/url?sa=i&url=https%3A%2F%2Fm.youtube.com%2Fwatch%3Fv%3DvOo__3GqyxM&psig=AOvVaw3NAOGCaPpCKpthwI5jxFFH&ust=1747125829355000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIDRhIvFnY0DFQAAAAAdAAAAABAK)
+**Network Policies**
+Each pod is a calico endpoint 
+2 types of calico endpoints
+1. Workdload endpoints (pods)
+2. Host endpoints (interface on a host)
+
+**Types**
+1. Network Policies --> Applied to pods,vm, container
+2. Global Network Policies --> Applied to any endpoint like pods/containers/vm/host interface
+
+**Calico Resources**
+1. Felix : Calico Agent that handles networking
+2. IPAM : Manages IP block
+3. Block Affinity : Track block affinity for ip addr mgmt
+4. BGP Peers
+5. IP Pools: Manages pool of ip address
+6. Host Endpoints: Configure Host Specific Endpoints
+7. Cluster Information
+8. Global Network Policy: Represent sets of IP globally
+9. Global Network Sets: Define namespace scoped network policy
+10. Network Sets: Represent namespace scopes set of IPs
+
+<img width="303" alt="image" src="https://github.com/user-attachments/assets/f20a807c-21da-470e-baff-2595cb9a4a7e" />
+
+
+
 
 
 
