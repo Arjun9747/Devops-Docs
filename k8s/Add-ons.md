@@ -19,6 +19,7 @@
 * **PersistentVolumeClaim (PVC)**: Requests storage resources from PVs.
 * **ResourceQuota**: Manages resource usage across Namespaces.
 * **Pod Disruption Budget (PDB)**: Ensures a minimum number of Pods are always running during disruptions.
+* **Init Containers**: Special containers that run before the main application containers start. They perform initialization logic such as setting up prerequisites.
 
 ### Advanced Concepts
 
