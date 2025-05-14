@@ -1,40 +1,85 @@
-# Kubernetes Core Concepts
-## Overview of Key Kubernetes Objects
+# Kubernetes Concepts Checklist
 
-### Core Concepts
+## Core Concepts
 
 * **Pod**: Smallest deployable units of computing that can contain one or more containers.
+	+ Use Case: Running containerized applications.
 * **Deployment**: Manages the deployment and scaling of Pods.
+	+ Use Case: Stateless applications and rolling updates.
 * **ReplicaSet**: Ensures the specified number of Pod replicas are running.
+	+ Use Case: High availability and redundancy.
 * **StatefulSet**: Manages stateful applications, providing stable identifiers for Pods.
+	+ Use Case: Databases and distributed applications requiring stable identity.
 * **DaemonSet**: Ensures a copy of a Pod runs on all (or some) Nodes.
+	+ Use Case: Log collection, monitoring agents.
 * **Job**: Manages batch or one-time tasks.
+	+ Use Case: Data processing jobs, image processing.
 * **CronJob**: Manages scheduled tasks, similar to Linux cron jobs.
+	+ Use Case: Database backups, report generation.
 * **Service**: Exposes Pods as a network service.
+	+ Use Case: Internal communication between microservices.
 * **Ingress**: Manages external HTTP/S access to services within a cluster.
+	+ Use Case: Routing traffic to backend services.
 * **Namespace**: Virtual clusters within a Kubernetes cluster to logically isolate resources.
+	+ Use Case: Multi-tenant environments.
 * **ConfigMap**: Provides configuration data to Pods.
+	+ Use Case: Application configuration without rebuilding images.
 * **Secret**: Stores sensitive information, such as passwords and API tokens.
+	+ Use Case: Securing database credentials, API keys.
 * **PersistentVolume (PV)**: Storage resource in the cluster.
+	+ Use Case: Long-term storage for databases or logs.
 * **PersistentVolumeClaim (PVC)**: Requests storage resources from PVs.
+	+ Use Case: Claiming storage for specific applications.
 * **ResourceQuota**: Manages resource usage across Namespaces.
+	+ Use Case: Controlling resource consumption.
 * **Pod Disruption Budget (PDB)**: Ensures a minimum number of Pods are always running during disruptions.
-* **Init Containers**: Special containers that run before the main application containers start. They perform initialization logic such as setting up prerequisites.
+	+ Use Case: Ensuring availability during upgrades.
+* **Init Container**: Special containers that run before the main application containers start.
+	+ Use Case: Initialization logic such as database migrations.
 
-### Advanced Concepts
+## Networking
 
-* **Horizontal Pod Autoscaler (HPA)**: Automatically scales the number of Pods based on CPU utilization or custom metrics.
-* **Vertical Pod Autoscaler (VPA)**: Adjusts resource requests and limits of Pods automatically.
-* **Mutating & Validating Webhooks**: For custom admission control policies.
-* **Custom Resource Definitions (CRDs)**: Extends Kubernetes API with custom objects.
-* **Role & RoleBinding**: Manages RBAC permissions for Namespaces.
-* **ClusterRole & ClusterRoleBinding**: Manages RBAC permissions cluster-wide.
-* **ServiceAccount**: Associates Pods with permissions to communicate with the Kubernetes API.
-* **Topology Spread Constraints**: Distributes Pods across zones/nodes for high availability.
-* **Finalizers**: Executes clean-up logic before resource deletion.
-* **Pod Anti-Affinity & Topology Spread**: Ensures Pods are spread across nodes for high availability.
-* **Node Affinity**: Manages Pod scheduling based on node labels.
-* **Taints and Tolerations**: Controls which nodes can run specific Pods.
+* **KubeProxy**: Manages networking for service discovery and load balancing.
+	+ Use Case: Distributing traffic within the cluster.
+* **KubeScheduler**: Determines which node a Pod runs on.
+	+ Use Case: Ensuring balanced resource utilization.
+* **Kubelet**: Agent running on each node to ensure containers are running.
+	+ Use Case: Managing pod lifecycle on worker nodes.
+* **CNI (Container Network Interface)**: Manages pod networking.
+	+ Use Case: Integrating different networking plugins.
+* **Network Policies**: Controls communication between Pods at the network level.
+	+ Use Case: Securing inter-Pod communication.
+* **Calico / Flannel / Weave**: Network plugins for Kubernetes.
+	+ Use Case: Overlay networking for multi-cluster communication.
+* **Overlay Network vs Underlay Network**: Important for multi-cluster networking.
+	+ Use Case: Traffic routing across nodes and regions.
+* **Headless Service**: Directly exposes Pod IPs without load balancing.
+	+ Use Case: Service discovery within StatefulSets.
+* **ClusterIP**: Exposes the service on a cluster-internal IP.
+	+ Use Case: Internal microservice communication.
+* **NodePort**: Exposes the service on each Node's IP at a static port.
+	+ Use Case: Directly accessing a service from outside the cluster.
+* **LoadBalancer**: Exposes the service externally using a cloud provider's load balancer.
+	+ Use Case: Publicly accessible web applications.
+
+## Advanced Concepts
+
+* **Custom Resource Definitions**
+
+* **Mutating & Validating Webhooks**
+
+* **Finalizers**: Ensures specific cleanup logic before the resource is removed.
+	+ Use Case: Graceful deletion of dependent resources.
+* **Horizontal Pod Autoscaler (HPA)**: Automatically scales the number of pods based on metrics.
+	+ Use Case: Scaling applications based on CPU or memory usage.
+* **Vertical Pod Autoscaler (VPA)**: Automatically adjusts the resource limits and requests of pods.
+	+ Use Case: Optimizing resource allocation for cost and performance.
+* **Pod Anti-Affinity / Topology Spread Constraints**: Controls pod distribution across nodes.
+	+ Use Case: Avoiding single-point failures.
+* **Node Affinity**: Controls which nodes a pod can be scheduled on.
+	+ Use Case: Scheduling Pods on high-memory or GPU nodes.
+* **Taints and Tolerations**: Restricts or allows pods to be scheduled on specific nodes.
+	+ Use Case: Isolating critical workloads from general workloads.
 
 ### Networking
 
