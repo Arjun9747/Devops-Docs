@@ -9,6 +9,7 @@
 1. Istiod --> Brain
 2. Pilot --> Configure Envoy Proxy
 3. Citadel -->Cert and TLS
-4. Istio CA --> Issues public and Private TLS cert to ensure communication between services.
+4. Galley --> Handling Config Validation
+5. Istio CA --> Issues public and Private TLS cert to ensure communication between services.
 
 
