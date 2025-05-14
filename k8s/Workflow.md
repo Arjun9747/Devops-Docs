@@ -24,6 +24,9 @@
 	• No traffic is sent to the Pod, but the container remains running.
 	• Kubernetes continues to probe, and if it becomes healthy again, it is added back to the Service.
 
+
+**Node Disk Pressure**
+
  ******************************************************************************************************
 
 
