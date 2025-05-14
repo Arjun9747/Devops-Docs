@@ -22,12 +22,14 @@
    * Whether any additonal rules should apply (timeout, retries)
 
 **Yaml Config**
+
 1. GW-API for gw and virtual service
 2. Configure egress settings for external service
 3. For creating service entries
 
 
 1. Rate Limiting
+   
    * Filter by ip/headers/path prefix (200 req per sec)
    * Gateway Configuration
    * Points to Docker image for service
@@ -52,3 +54,24 @@
 	8.Flexibility: The rate limiting rules can be customized based on IP, headers, or path prefix, allowing for flexible and targeted rate limiting.
  
 	9.Monitoring and alerting: The integration with StatsD enables monitoring and alerting on rate limiting metrics, helping to detect issues and optimize performance.
+
+ *************************************************************************************
+ **Worflow from Serive A to Service B**
+
+ 1. User send request to Service in mesh
+ 2. Ingress GW handles the requests
+ 3. Serivice A Sidecar Proxy Recieves the requests
+ 4. Outbound call to service B
+
+**Features**
+
+1. Ability to dynamically load balance between diff service version without code changes
+2. Configure timeout, retries, fault-injections
+3. Gather telemetry metrics, trace logs
+4. Enable tls encryption, authentication and authorization between services
+
+Istio Ambient Mesh is a new architecture introduced by the Istio project to offer sidecar-less service mesh capabilities. It provides the same key benefits of Istio (like traffic control, observability, and security), without requiring sidecar proxies (like Envoy) to be injected into every pod.
+
+
+
+
