@@ -11,3 +11,7 @@
 | **Secret**                  | **Type:** Ephemeral (tied to Kubernetes Secret). <br> **Usage:** Store sensitive info like passwords, tokens, keys. <br> **Use Case:** Secure app configs. |
 
 
+**Observability**
+
+<img width="368" alt="image" src="https://github.com/user-attachments/assets/b611b011-f414-4fff-ac43-4d511f838777" />
+
