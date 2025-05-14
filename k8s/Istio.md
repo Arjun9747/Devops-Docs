@@ -41,13 +41,13 @@
  
 	3. Rate Limiting Server: If the request matches a rate limiting rule, the Rate Limiter Filter sends a request to the Rate Limiting Server to check if the request should be allowed or blocked
  
-	4.	Redis: The Rate Limiting Server checks the Redis database to see if the request limit has been exceeded for the given IP, headers, or path prefix.
+	4. Redis: The Rate Limiting Server checks the Redis database to see if the request limit has been exceeded for the given IP, headers, or path prefix.
  
-	5.	Rate limiting decision: If the request limit has not been exceeded, the Rate Limiting Server returns an "allow" decision to the Rate Limiter Filter. If the limit has been exceeded, it returns a "block" decision
+	5. Rate limiting decision: If the request limit has not been exceeded, the Rate Limiting Server returns an "allow" decision to the Rate Limiter Filter. If the limit has been exceeded, it returns a "block" decision
  
-	6.	Metrics collection: The Rate Limiter Filter sends metrics to StatsD, which collects and exports rate limiting metrics for monitoring.
+	6. Metrics collection: The Rate Limiter Filter sends metrics to StatsD, which collects and exports rate limiting metrics for monitoring.
  
-	7.	Rate limiting: The configuration ensures that the application is protected from excessive traffic, preventing overload and potential downtime.
+	7. Rate limiting: The configuration ensures that the application is protected from excessive traffic, preventing overload and potential downtime.
  
 	8.Flexibility: The rate limiting rules can be customized based on IP, headers, or path prefix, allowing for flexible and targeted rate limiting.
  
