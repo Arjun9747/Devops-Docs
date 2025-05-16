@@ -45,6 +45,30 @@
 | PVC Configuration | Directly referenced in `volumes`         | Defined in `volumeClaimTemplates`                                          |
 | Access Mode       | Usually `ReadWriteMany` (RWX) for shared | Typically `ReadWriteOnce` (RWO) for individual storage                     |
 
+#You need to create a separate Persistent Volume Claim (PVC) object and reference it in the Deployment YAML.
+
+## VolumeClaimTemplates vs PVC
+
+**VolumeClaimTemplates** and **PersistentVolumeClaim (PVC)** are both used to provision storage resources in Kubernetes, but they serve different purposes and have different use cases.
+
+### PersistentVolumeClaim (PVC):
+- A PVC is a request for storage resources that can be fulfilled by a Persistent Volume (PV).
+- A PVC is a separate object that needs to be created and managed independently.
+- A PVC can be used by multiple pods, and all pods will share the same storage resources.
+- PVCs are typically used in stateless applications where data is not critical or can be easily recreated.
+
+### VolumeClaimTemplates:
+- VolumeClaimTemplates is a field in StatefulSets that allows you to define a template for creating PVCs.
+- When a StatefulSet is created, Kubernetes automatically creates a PVC for each replica based on the template.
+- Each replica will have its own dedicated PVC, and the PVC name will be generated automatically based on the StatefulSet name and replica index.
+- VolumeClaimTemplates are typically used in stateful applications where each replica needs its own dedicated storage resources.
+
+### Key differences:
+| Aspect               | PVC                                           | VolumeClaimTemplates                             |
+|----------------------|-----------------------------------------------|-------------------------------------------------|
+| **Management**       | PVCs need to be created and managed separately | Managed automatically by Kubernetes with StatefulSet |
+| **Storage sharing**  | PVCs can be shared by multiple pods           | Creates a separate PVC for each replica          |
+| **Use case**         | Suitable for stateless applications            | Suitable for stateful applications                |
 
 
 
