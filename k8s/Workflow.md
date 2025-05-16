@@ -29,7 +29,13 @@
 
  ******************************************************************************************************
 
-<img width="483" alt="image" src="https://github.com/user-attachments/assets/36cff448-b2a0-4019-8ef3-f6b647d406b4" />
+| Feature | Deployment | StatefulSet |
+| --- | --- | --- |
+| Pod Identity | All replicas are identical; pod names are dynamic (e.g., `my-app-xyz`). | Each pod gets a unique, persistent identity (e.g., `my-app-0`, `my-app-1`). |
+| Storage Persistence | PVCs are shared across all pods if not managed correctly. | Each pod gets its own dedicated PVC, managed by its ordinal index. |
+| Pod Order | All pods start and stop simultaneously, in any order. | Pods start and terminate sequentially (`0 → 1 → 2`). |
+| Network Identity | Pods get random DNS names. | Each pod has a stable DNS identity: `pod-name.service-name.namespace.svc.cluster.local`. |
+| Use Cases | Stateless apps (web servers, APIs). | Stateful apps (databases, Kafka, Zookeeper). |
 
 
 
