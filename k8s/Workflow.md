@@ -39,6 +39,15 @@
 
 
 
+| Aspect            | Deployment                               | StatefulSet                                                                |
+| ----------------- | ---------------------------------------- | -------------------------------------------------------------------------- |
+| PVC Usage         | Shared among all pods                    | Each pod gets its own PVC (`app-storage-my-app-0`, `app-storage-my-app-1`) |
+| PVC Configuration | Directly referenced in `volumes`         | Defined in `volumeClaimTemplates`                                          |
+| Access Mode       | Usually `ReadWriteMany` (RWX) for shared | Typically `ReadWriteOnce` (RWO) for individual storage                     |
+
+
+
+
     
     
 
