@@ -1,4 +1,3 @@
-```python 
 
 import request 
 import logging 
@@ -18,4 +17,4 @@ with open('https_file.txt', 'r') as file:
           logging.info("Requests from {ip_address} found. Total Requests {request_counts[ip_address]}")
     else:
         logging.warning("No ip address found in line")
-```
+
