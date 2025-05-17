@@ -71,6 +71,12 @@
 | **Use case**         | Suitable for stateless applications            | Suitable for stateful applications                |
 
 
+**External Services**
+
+External Service is a way to expose a service running outside of your Kubernetes cluster to be accessible within the cluster as if it were a native Kubernetes service. This allows internal applications to communicate with external databases, APIs, or legacy systems without complex networking configurations.
+
+Use Case: Connecting to legacy systems, third-party APIs, or databases hosted outside of Kubernetes.
+
 
     
     
