@@ -79,4 +79,13 @@ import psutil
 print(psutil.cpu_time())
 print(psutil.cpu_count())
 
+```
+**strip function**
+```python
+text = "---Hello, World!---"
+result = text.strip("-")
+print(f"'{result}'")
+```
+
+
 
