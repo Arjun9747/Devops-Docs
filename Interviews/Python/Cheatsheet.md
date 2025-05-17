@@ -39,5 +39,44 @@ response= request.get("https://webpage.com")
 print(response.json)
 ```
 
+**json handling**
+
+```python
+import json 
+
+with open('data.json','r') as file:
+    data = json.load(file)
+print (data)
+```
+**import logging**
+
+```python
+
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logging.INFO("this is a info message")
+```
+
+#docker
+
+```python
+
+import docker
+
+client=docker.from_env()
+containers= client.container.list()
+
+for containers in container:
+    print(contianer.name)
+```
+
+**Monitor system**
+
+```python
+import psutil
+
+print(psutil.cpu_time())
+print(psutil.cpu_count())
 
 
