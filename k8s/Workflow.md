@@ -10,6 +10,7 @@
 • **Action Taken:*
 
   • Kubernetes kills the container and attempts to restart it based on the Pod's restartPolicy.
+  
   * The Pod is not removed, only the container inside is restarted.
 
 **When readiness Probe fails**
@@ -20,8 +21,11 @@
 
 
 • *Action Taken:*
+
 	• The Pod is removed from the Service endpoints.
+ 
 	• No traffic is sent to the Pod, but the container remains running.
+ 
 	• Kubernetes continues to probe, and if it becomes healthy again, it is added back to the Service.
 
  ******************************************************************************************************
@@ -141,6 +145,7 @@ Use Case: Connecting to legacy systems, third-party APIs, or databases hosted ou
 
 ***************************************************************************************************
 **External Service**
+
 An External Service in Kubernetes is a way to expose applications running outside of your Kubernetes cluster to services running inside the cluster. It allows Kubernetes-managed applications to connect to external databases, third-party services, or APIs.
 
 ```yaml
