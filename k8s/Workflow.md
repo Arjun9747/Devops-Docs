@@ -24,10 +24,72 @@
 	• No traffic is sent to the Pod, but the container remains running.
 	• Kubernetes continues to probe, and if it becomes healthy again, it is added back to the Service.
 
-
-**Node Disk Pressure**
-
  ******************************************************************************************************
+
+ **Deployments** are designed for stateless applications, where data persistence across pod restarts is typically not required.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+        - name: nginx-storage
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: nginx-storage
+        persistentVolumeClaim:
+          claimName: nginx-pvc
+```
+**StatefulSets** are for stateful applications where each pod needs its own independent storage.
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-statefulset
+spec:
+  serviceName: "mysql"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 5Gi
+```
+
 
 | Feature | Deployment | StatefulSet |
 | --- | --- | --- |
@@ -91,6 +153,8 @@ spec:
   type: ExternalName
   externalName: mydb-instance.xxxxxxxxxx.us-east-1.rds.amazonaws.com
 ```
+**type:** ExternalName — This allows you to map the service to an external DNS name.
+**externalName** — This is the DNS name of your RDS instance. You get this from the RDS dashboard.
 
 
     
