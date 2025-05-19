@@ -77,6 +77,21 @@ External Service is a way to expose a service running outside of your Kubernetes
 
 Use Case: Connecting to legacy systems, third-party APIs, or databases hosted outside of Kubernetes.
 
+***************************************************************************************************
+**External Service**
+An External Service in Kubernetes is a way to expose applications running outside of your Kubernetes cluster to services running inside the cluster. It allows Kubernetes-managed applications to connect to external databases, third-party services, or APIs.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-rds-database
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: mydb-instance.xxxxxxxxxx.us-east-1.rds.amazonaws.com
+```
+
 
     
     
