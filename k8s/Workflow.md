@@ -154,6 +154,7 @@ spec:
   externalName: mydb-instance.xxxxxxxxxx.us-east-1.rds.amazonaws.com
 ```
 **type:** ExternalName — This allows you to map the service to an external DNS name.
+
 **externalName** — This is the DNS name of your RDS instance. You get this from the RDS dashboard.
 
 
