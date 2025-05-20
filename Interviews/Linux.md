@@ -25,3 +25,37 @@ wait(): Suspends execution of the current process until one of its children term
 open(), read(), write(), close(): Used for file input/output operations.
 
 kill(): Sends a signal to a process (not directly used in command execution, but relevant in process management).
+
+
+**Linux Primitives**
+
+# Linux Container Primitives
+
+| **Primitive** | **Purpose** |
+| --- | --- |
+| Namespaces |  |
+| cgroups |  |
+| Union Filesystems |  |
+| Capabilities |  |
+| Seccomp |  |
+| SELinux / AppArmor |  |
+
+## Fill in the Purpose column with brief descriptions:
+
+* Namespaces: 
+* cgroups: 
+* Union Filesystems: 
+* Capabilities: 
+* Seccomp: 
+* SELinux / AppArmor: 
+
+## Completed Table:
+
+| **Primitive** | **Purpose** |
+| --- | --- |
+| Namespaces | Resource isolation (processes, network, mounts, users) |
+| cgroups | Resource limitation and prioritization |
+| Union Filesystems | Layered, efficient filesystem for containers |
+| Capabilities | Granular permission control |
+| Seccomp | System call filtering for security |
+| SELinux / AppArmor | Enforce access control policies |
