@@ -31,24 +31,6 @@ kill(): Sends a signal to a process (not directly used in command execution, but
 
 # Linux Container Primitives
 
-| **Primitive** | **Purpose** |
-| --- | --- |
-| Namespaces |  |
-| cgroups |  |
-| Union Filesystems |  |
-| Capabilities |  |
-| Seccomp |  |
-| SELinux / AppArmor |  |
-
-## Fill in the Purpose column with brief descriptions:
-
-* Namespaces: 
-* cgroups: 
-* Union Filesystems: 
-* Capabilities: 
-* Seccomp: 
-* SELinux / AppArmor: 
-
 ## Completed Table:
 
 | **Primitive** | **Purpose** |
