@@ -15,8 +15,13 @@
 **System Calls Involved:**
 
 fork(): Creates a new process by duplicating an existing one.
+
 exec(): Replaces the current process image with a new one.
+
 exit(): Terminates the current process and returns an exit status.
+
 wait(): Suspends execution of the current process until one of its children terminates.
+
 open(), read(), write(), close(): Used for file input/output operations.
+
 kill(): Sends a signal to a process (not directly used in command execution, but relevant in process management).
