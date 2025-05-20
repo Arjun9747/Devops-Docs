@@ -21,4 +21,12 @@ def reversed_list(my_list):
       reversed_list.insert(0,item)
  return reversed_list
 ```
+**Remove duplicate from list**
+
+```python
+
+my_list = [1,2,3,3,4,5,1]
+unique_list = list(set(my_list))
+```
+
 
