@@ -36,6 +36,17 @@ Ingress controller uses **host headers**(like app.com) and path (/images) to det
 
  **IngressClass** is a Kubernetes resource that defines which Ingress Controller should handle Ingress resources. It acts as a way to classify and separate traffic routing based on specific controllers within the cluster.
 
+
+ **Workflow**
+
+ 1. You install ingress controller
+ 2. K8S controller watches for changes to Ingress resources
+ 3. You define Ingress routing rules in yaml
+ 4. DNS --> Ingress Controller --> Service
+ 5. Routing Mechanism based on Host and Path based routing
+ 6. TLS/HTTPS routing
+ 7. Dynamically updates its internal routing configuration (Eg: NGINX reloads configs)
+
  
 
 
