@@ -31,7 +31,7 @@ unique_list = list(set(my_list))
 
 **List conversion**
 
-``python
+```python
 
 s = "hello"
 char_list = list(s)
