@@ -45,4 +45,7 @@ words = ['apple', 'banana', 'cherry']
 list1 = ''.join('words')
 ```
 
+<img width="676" alt="image" src="https://github.com/user-attachments/assets/71c762b7-c9b6-4a11-91b4-12b4f5b8879d" />
+
+
 
