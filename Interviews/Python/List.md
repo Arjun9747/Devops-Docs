@@ -29,4 +29,14 @@ my_list = [1,2,3,3,4,5,1]
 unique_list = list(set(my_list))
 ```
 
+**List conversion**
+
+``python
+#string to list
+s = "hello"
+char_list = list(s)
+print(char_list)
+```
+
+
 
