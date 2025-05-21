@@ -33,8 +33,6 @@ unique_list = list(set(my_list))
 
 ``python
 
-#string to list
-
 s = "hello"
 char_list = list(s)
 print(char_list)
