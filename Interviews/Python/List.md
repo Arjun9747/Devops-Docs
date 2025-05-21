@@ -38,5 +38,11 @@ char_list = list(s)
 print(char_list)
 ```
 
+**String to list**
+
+```python
+words = ['apple', 'banana', 'cherry']
+list1 = ''.join('words')
+```
 
 
