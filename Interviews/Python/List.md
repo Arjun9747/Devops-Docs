@@ -44,8 +44,26 @@ print(char_list)
 words = ['apple', 'banana', 'cherry']
 list1 = ''.join('words')
 ```
+```python
+word1 = "hello world"
 
-<img width="676" alt="image" src="https://github.com/user-attachments/assets/71c762b7-c9b6-4a11-91b4-12b4f5b8879d" />
+
+
+print(word1)
+print("After converting string to list")
+w_list = list(word1)
+print(w_list)
+
+print("\nafter joining list with *")
+list_word = '*'.join(w_list)
+print(list_word)
+
+print("\nAfter using split")
+words = list_word.split('*')
+print(words)
+```
+<img width="331" alt="image" src="https://github.com/user-attachments/assets/bca1d714-c805-4b86-90b2-0658d2a523db" />
+
 
 
 
