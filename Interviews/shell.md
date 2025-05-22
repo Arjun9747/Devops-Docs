@@ -152,5 +152,8 @@ admin:x:0:0:root:/root:/bin/bash
 | `${var#prefix}`    | Remove shortest match from start | `"v1.2.3-release"`      | `"1.2.3-release"` |
 | `${var##prefix}`   | Remove longest match from start  | `"v1.2.3-release"`      | `"release"`    |
 
+path="abcd.txt"
+echo "${path%.txt}"  # Output: abcd
+echo "${path##*.}"  # Output: txt
 
 
