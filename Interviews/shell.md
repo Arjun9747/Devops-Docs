@@ -68,3 +68,33 @@ mv file1.txt file1.log
 sort < file.txt will sort the contents of file.txt.
 ```
 
+$0	--> script name 
+1, $2, $3, etc. --> echo first second and third arguments 
+$#	--> number of command line arguments 
+$?	--> Exit status 
+$$	--> PID 
+
+**Loops**
+
+```shell
+for i in {1..5}; do
+  if [ $i -eq 3 ]; then
+    continue
+  fi
+  echo "$i"
+done
+
+i=1
+while [ $i -le 5 ]; do
+  echo "$i"
+  i=$((i + 1))
+done
+
+for file in *.log; do
+    echo "Processing $file"
+done
+
+
+```
+
+
