@@ -33,7 +33,6 @@ i tells xargs to replace {} with each input
 
 So for file1, the command becomes
 
-```shell
 mv file1.txt file1.log
 ```
 **Redirection**
