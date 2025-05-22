@@ -124,6 +124,12 @@ fg # bring background job to foreground
 
 bg # send the  the background 
 
+sleep 5  # pause for 5 seconds
+
+wait $!  # wait for the last background job to complete
+
+wait 1234  # wait for process with PID 1234 to complete
+
 
 
 
