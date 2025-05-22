@@ -97,21 +97,31 @@ done
 ```
 
 exit 0 # sucessfull termination
+
 exit 1 # general error 
 
 exit $ # exit status of last command 
+
 set -e # command exits if there is an error in command 
+
 set -o pipefail # pipeline command fails for non-zero exit status 
+
 set -x # debug error 
 
 ps # process status --> info about running process 
+
 top # real time info 
+
 kill # execute SIGTERM(terminate) , SIGKILL (force kill)
+
 no hup # no hung up --> command continue to run after session termination
+
 & ./run.sh  # used to run command in backgroud
 
 jobs # runs background jobs 
+
 fg # bring background job to foreground 
+
 bg # send the  the background 
 
 
