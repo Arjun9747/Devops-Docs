@@ -7,6 +7,7 @@ done
 ```
 
 **Renaming file extenstion**
+
 ```shell
 
 echo "hello world" | cut -c 1-5
@@ -16,6 +17,8 @@ Output: hello
 echo "user1:x:1001:1001:User One:/home/user1:/bin/bash" | cut -d ':' -f 1,5
 
 -d ':' sets colon as the delimiter; -f 1,5 extracts the 1st and 5th fields
+
+```
 
 ```shell
 ls | cut -d . -f1 | xargs -i mv {}.txt {}.log
