@@ -172,5 +172,10 @@ echo "${path##*.}"  # Output: txt
 
 echo "root:x:0:0:root:/root:/bin/bash" | awk -F ':' '{print $5}'
 
+uniq only removes consecutive duplicates, so it doesn’t help unless the input is sorted.
+
+sort names.txt | uniq
+
+
 
 
