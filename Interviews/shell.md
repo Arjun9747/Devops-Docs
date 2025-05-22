@@ -23,3 +23,48 @@ So for file1, the command becomes
 ```shell
 mv file1.txt file1.log
 ```
+**Redirection**
+
+">:" Redirects an output
+
+```shell
+"Hello" > file.txt
+```
+">>" Appends 
+
+```shell
+"Hello" >> file.txt --> add the word to the end of the text
+```
+
+**Error Redirection**
+
+"2>"
+
+```shell
+2> error.log --> redirects error message
+```
+
+"2>>"
+
+```shell
+2>> error.log will append error messages to error.log
+```
+
+**Output and Redirection**
+
+"&>"
+```shell
+&> output.log  --> Redirects both stdout and stderr to a file
+```
+
+"&>>"
+
+```shell
+&>> output.log will append both output and error messages to output.log
+```
+**Input Redirection**
+
+```shell
+sort < file.txt will sort the contents of file.txt.
+```
+
