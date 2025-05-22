@@ -170,4 +170,7 @@ echo "${path%.txt}"  # Output: abcd
 
 echo "${path##*.}"  # Output: txt
 
+echo "root:x:0:0:root:/root:/bin/bash" | awk -F ':' '{print $5}'
+
+
 
