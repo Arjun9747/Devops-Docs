@@ -136,5 +136,9 @@ wait 1234  # wait for process with PID 1234 to complete
 | `awk` | Pattern scanning and processing | `awk '{print $1, $3}' users.txt` (Print 1st & 3rd columns) |
 | `sed` | Stream editor for modifying text | `sed 's/error/ERROR/g' log.txt` (Replace 'error' with 'ERROR') |
 
+```shell
+root:x:0:0:root:/root:/bin/bash
+```
+
 
 
