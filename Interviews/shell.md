@@ -145,10 +145,12 @@ wait 1234  # wait for process with PID 1234 to complete
 admin:x:0:0:root:/root:/bin/bash
 ```
 
-| ${var%suffix} | Remove shortest match from end | "logfile.txt" | "logfile" |
-| ${var%%suffix} | Remove longest match from end | "archive.tar.gz" | "archive" |
-| ${var#prefix} | Remove shortest match from start | "v1.2.3-release" | "1.2.3-release" |
-| ${var##prefix} | Remove longest match from start | "v1.2.3-release" | "release" |
+| Expression         | Description                      | Example Input          | Result         |
+|--------------------|----------------------------------|-------------------------|----------------|
+| `${var%suffix}`    | Remove shortest match from end   | `"logfile.txt"`         | `"logfile"`    |
+| `${var%%suffix}`   | Remove longest match from end    | `"archive.tar.gz"`      | `"archive"`    |
+| `${var#prefix}`    | Remove shortest match from start | `"v1.2.3-release"`      | `"1.2.3-release"` |
+| `${var##prefix}`   | Remove longest match from start  | `"v1.2.3-release"`      | `"release"`    |
 
 
 
