@@ -137,7 +137,7 @@ wait 1234  # wait for process with PID 1234 to complete
 | `sed` | Stream editor for modifying text | `sed 's/error/ERROR/g' log.txt` (Replace 'error' with 'ERROR') |
 
 ```shell
-root:x:0:0:root:/root:/bin/bash
+admin:x:0:0:root:/root:/bin/bash
 ```
 
 
