@@ -43,24 +43,21 @@ sed '/^#/d' file	--> delete commented line
 
 sed '5d' file	--> delete line 5 
 ```
-
+```nginx
 Line 1
-
 Line 2
-
 Line 3
+```
 
 ```shell
 sed 'Line 2'/a Append new line
 ```
-
+```nginx
 Line 1
-
 Line 2
-
 Appended Line
-
 Line 3
+```
 
 ```shell
 
