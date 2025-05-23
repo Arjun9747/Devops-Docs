@@ -87,11 +87,12 @@ Bob
 
 ```shell
 cut -d',' -f1,3 file.csv
+```
 # Output:
 # John,Developer
 # Alice,Manager
 # Bob,Analyst
-```
+
 1 and 3rd field
 
 
