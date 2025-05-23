@@ -62,7 +62,11 @@ Appended Line
 
 Line 3
 
-sed -n '/error/p' file	
+```shell
+
+sed -n '/error/p' file
+
+```
 
 print only lines matching "error" pattern
 
