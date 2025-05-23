@@ -45,7 +45,9 @@ sed '5d' file	--> delete line 5
 ```
 
 Line 1
+
 Line 2
+
 Line 3
 
 ```shell
@@ -53,8 +55,11 @@ sed 'Line 2'/a Append new line
 ```
 
 Line 1
+
 Line 2
+
 Appended Line
+
 Line 3
 
 
