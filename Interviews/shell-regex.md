@@ -74,6 +74,27 @@ John 25 Developer
 Alice 30 Manager
 Bob 28 Analyst
 ```
+``shell
+cut -d ' ' f1 file.txt 
+```
+John
+
+Alice
+
+Bob
+
+#-d delimiter space & f1 --> first field
+
+```shell
+cut -d',' -f1,3 file.csv
+# Output:
+# John,Developer
+# Alice,Manager
+# Bob,Analyst
+```
+1 and 3rd field
+
+
 
 
 
