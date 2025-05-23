@@ -81,9 +81,13 @@ sort < file.txt will sort the contents of file.txt.
 ```
 
 $0	--> script name 
+
 1, $2, $3, etc. --> echo first second and third arguments 
+
 $#	--> number of command line arguments 
+
 $?	--> Exit status 
+
 $$	--> PID 
 
 **Loops**
