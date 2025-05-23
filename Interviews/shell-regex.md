@@ -15,7 +15,8 @@ awk -F ',' '$3 ~ /sign/' data.txt   --> output Designer
 
 awk '/error/ { print $0 }' logfile.txt --> matches line contains "error" word
 
-awk $3 == 'error' { print $0 } logfile.txt  --> 3rd coln is error, print entire line, $0 refers to the entire line of input.
+awk $3 == 'error' { print $0 } logfile.txt  --> 3rd coln is error, print entire line,
+                                                 $0 refers to the entire line of input.
 
 awk '$1 == "INFO" && $3 ~ /timeout/ { print $0 }' logfile.txt
 
