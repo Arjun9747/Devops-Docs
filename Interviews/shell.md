@@ -103,11 +103,11 @@ done
 for file in $file; do
   mv $file "${file%.txt}.log"
 
-``shell
+
 data="value123"
-echo "${data%23}"
+echo "${data%23}"   ##output --> 1
 ```
-output --> 1
+
 
 #
 
