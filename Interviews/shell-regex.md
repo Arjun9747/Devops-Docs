@@ -12,6 +12,21 @@ Eve,30,Analyst
 awk -F ',' `$3 = "Engineer" { print $1}'  data.txt
 
 awk -F ',' '$3 ~ /sign/' data.txt   --> output Designer
+
+awk '/error/ { print $0 }' logfile.txt --> matches line contains "error" word
+
+awk $3 == 'error' { print $0 } logfile.txt  --> 3rd coln is error, print entire line | $0 refers to the entire line of input.
+
+awk '$1 == "INFO" && $3 ~ /timeout/ { print $0 }' logfile.txt
+
+Matches lines where the first field is "INFO" and the third field contains "timeout".
+
+awk 'BEGIN { print "Start Processing" }
+     /error/ { count++ }
+     END { print "Total error lines:", count }' logfile.txt
+
+print start message, which matches the pattern "error" count it and display total number of count
+
 ```
 
 
