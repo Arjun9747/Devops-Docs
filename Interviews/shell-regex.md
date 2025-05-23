@@ -70,6 +70,15 @@ sed -n '/error/p' file
 
 print only lines matching "error" pattern
 
+**CUT**
+
+```nginx
+John 25 Developer
+Alice 30 Manager
+Bob 28 Analyst
+```
+
+
 
 
 
