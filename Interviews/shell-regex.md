@@ -29,7 +29,7 @@ print start message, which matches the pattern "error" count it and display tota
 
 ```
 
---------------------------------------------------------------------------------------
+//////////////////////////////////////////////////////////////////////////////////
 
 **sed**
 
@@ -53,7 +53,7 @@ Line 3
 sed 'Line 2'/a Append new line
 ```
 output
-----------
+-----
 Line 1
 Line 2
 Appended Line
