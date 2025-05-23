@@ -103,6 +103,12 @@ done
 for file in $file; do
   mv $file "${file%.txt}.log"
 
+``shell
+data="value123"
+echo "${data%23}"
+```
+output --> 1
+
 #
 
 i=1
@@ -179,6 +185,8 @@ echo "root:x:0:0:root:/root:/bin/bash" | awk -F ':' '{print $5}'
 uniq only removes consecutive duplicates, so it doesn’t help unless the input is sorted.
 
 sort names.txt | uniq
+
+
 
 
 
