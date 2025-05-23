@@ -33,6 +33,33 @@ print start message, which matches the pattern "error" count it and display tota
 
 **sed**
 
+```shell
+sed 's/old/new/' file --> replaces the first occurrence of the string "old" with "new" on each line of file.txt
+
+sed 's/old/new/g ' file --> replaces the all occurrence of the string "old" with "new" on each line of file.txt
+
+sed '/pattern/ s/foo/bar/' file --> replaces the pattern first occurance of foo with bar
+
+sed '/^#/d' file	--> delete commented line
+
+sed '5d' file	--> delete line 5 
+```
+
+Line 1
+Line 2
+Line 3
+
+```shell
+sed 'Line 2'/a Append new line
+```
+output
+----------
+Line 1
+Line 2
+Appended Line
+Line 3
+
+
 
 
 
