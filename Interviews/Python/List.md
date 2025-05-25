@@ -64,6 +64,20 @@ print(words)
 ```
 <img width="331" alt="image" src="https://github.com/user-attachments/assets/bca1d714-c805-4b86-90b2-0658d2a523db" />
 
+Enumerate 
+
+'''python
+
+colors = ['red', 'green', 'blue']
+for index, color in enumerate(colors, start=1):
+    print(f"{index}: {color}")
+
+'''
+
+1: red
+2: green
+3: blue
+
 
 
 
