@@ -66,13 +66,12 @@ print(words)
 
 Enumerate 
 
-'''python
+```python
 
 colors = ['red', 'green', 'blue']
 for index, color in enumerate(colors, start=1):
     print(f"{index}: {color}")
-
-'''
+```
 
 1: red
 2: green
