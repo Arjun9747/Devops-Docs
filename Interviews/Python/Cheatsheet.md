@@ -223,6 +223,13 @@ for IP address
 {3} --> repeat the grp 3 times
 \b boundary
 
+**mail address**
+
+```python
+\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b
+```
+
+
 
 
 
