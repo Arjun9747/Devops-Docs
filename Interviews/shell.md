@@ -197,6 +197,68 @@ else
   echo "File does not exist"
 fi 
 ```
+**Cron job**
+```shell
+0 0 * * * /home/ubuntu/script.sh
+```
+M H D M Day of Week Command 
+
+**$? hold the exist status of the command
+```shell
+if [ $? -eq 0 ]; then
+  echo "command executed successfully"
+else
+  echo "Command failed execution"
+fi
+```
+**Get disk usage information, excluding certain filesystems**
+```shell
+df -H | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while read output; do
+    usage=$(echo $output | awk '{ print $1}' | sed 's/%//g')
+    partition=$(echo $output | awk '{ print $2 }')
+    if [ $usage -ge $THRESHOLD ]; then
+        echo "Alert: High disk usage on $partition ($usage%)"
+        # Send email or other alert here (e.g., using mail command)
+    fi
+done
+```
+**Check if the service is active**
+
+if ! systemctl is-active --quiet $SERVICE; then
+    echo "$SERVICE is not running, starting it..."
+    systemctl start $SERVICE
+    echo "$SERVICE started"
+else
+    echo "$SERVICE is already running"
+fi
+
+**Find and archive logs older than 7 days**
+
+find $LOG_DIR -type f -mtime +7 -exec tar -rvf $BACKUP_DIR/logs_backup_$(date +%F).tar {} \; -exec rm {} \;
+echo "Logs older than 7 days have been backed up and deleted."
+
+-m time 
+-c time -ownership/permission
+-a time - access time 
+
+#!/bin/bash
+
+**Define the services to check**
+SERVICES=("nginx" "mysql" "redis")
+
+# Loop through each service and check its status
+for SERVICE in "${SERVICES[@]}"; do
+    if ! systemctl is-active --quiet $SERVICE; then
+        echo "$SERVICE is not running, restarting it..."
+        systemctl restart $SERVICE
+        echo "$SERVICE restarted"
+    else
+        echo "$SERVICE is running"
+    fi
+done
+
+
+
 
 
 
