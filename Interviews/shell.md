@@ -236,7 +236,8 @@ fi
 **Find and archive logs older than 7 days**
 
 ```shell
-find $LOG_DIR -type f -mtime +7 -exec tar -rvf $BACKUP_DIR/logs_backup_$(date +%F).tar {} \; -exec rm {} \;
+find $LOG_DIR -type f -mtime +7 -exec tar -rvf $BACKUP_DIR/logs_backup_$(date +%F).tar {} \;
+ -exec rm {} \;
 echo "Logs older than 7 days have been backed up and deleted."
 ```
 -m time 
