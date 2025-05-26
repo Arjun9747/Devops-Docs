@@ -207,6 +207,7 @@ RBAC Role only allows actions in dev namespace
 Prevents access to prod workloads
 
 **Namespace level access**
+**IAM Roles to Service Accounts (IRSA)**
 
 1. Create IAM Role for Developers
 
@@ -254,6 +255,8 @@ Since RBAC is deny-by-default, not granting a RoleBinding in prod means:
 They can’t list, create, or delete anything in prod
 
 Even if they try: kubectl get pods -n prod → ❌ Forbidden
+
+
 
 
 
