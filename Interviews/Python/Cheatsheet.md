@@ -114,6 +114,38 @@ data = {"name": "Alice", "age": 30}
 json_string = json.dumps(data)
 ```
 
+**Configparser**
+
+configparser is a built-in Python module used to handle configuration files (INI format). It's ideal for separating configuration from code—like database settings, file paths, or environment-specific variables.
+
+```ini
+[database]
+host = localhost
+port = 5432
+username = admin
+password = secret
+```
+
+```python
+import configparser
+
+# Create a config parser instance
+config = configparser.ConfigParser()
+
+# Read the config file
+config.read('config.ini')
+
+# Access values
+db_host = config['database']['host']
+db_port = config.getint('database', 'port')
+
+print(f"Connecting to DB at {db_host}:{db_port}")
+print(f"Log Level: {log_level}")
+```
+
+
+
+
 
 
 
