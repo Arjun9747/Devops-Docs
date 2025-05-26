@@ -259,7 +259,7 @@ for SERVICE in "${SERVICES[@]}"; do
     fi
 done
 ```
-
+```code
 ┌──────────── minute (0 - 59)
 │ ┌────────── hour (0 - 23)
 │ │ ┌──────── day of month (1 - 31)
@@ -268,6 +268,7 @@ done
 │ │ │ │ │
 │ │ │ │ │
 0 0 * * * /path/to/your/script.sh
+```
 
 
 
