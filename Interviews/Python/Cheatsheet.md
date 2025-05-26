@@ -207,6 +207,8 @@ next(csv.data)
 next(csv.data)
 
 ```
+csv.reader(file) --> print the output in a list
+csv.readelines(file) --> return string 
 
 
 
