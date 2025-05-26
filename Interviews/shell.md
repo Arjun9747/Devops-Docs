@@ -212,6 +212,7 @@ else
 fi
 ```
 **Get disk usage information, excluding certain filesystems**
+
 ```shell
 df -H | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while read output; do
     usage=$(echo $output | awk '{ print $1}' | sed 's/%//g')
@@ -238,7 +239,6 @@ fi
 find $LOG_DIR -type f -mtime +7 -exec tar -rvf $BACKUP_DIR/logs_backup_$(date +%F).tar {} \; -exec rm {} \;
 echo "Logs older than 7 days have been backed up and deleted."
 ```
-
 -m time 
 -c time -ownership/permission
 -a time - access time 
