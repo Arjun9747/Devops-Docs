@@ -210,6 +210,22 @@ next(csv.data)
 csv.reader(file) --> print the output in a list
 csv.readelines(file) --> return string 
 
+**Regex**
+
+for IP address
+```python
+\b(?:[0-9]{1,3}\.){3}\b
+```
+?: --> : not going to capture this grp
+[0-9] --> 0-9 numbers
+{1,3} --> 3 combinations
+\. --> matches . 
+{3} --> repeat the grp 3 times
+\b boundary
+
+
+
+
 
 
 
