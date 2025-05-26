@@ -142,6 +142,19 @@ db_port = config.getint('database', 'port')
 print(f"Connecting to DB at {db_host}:{db_port}")
 print(f"Log Level: {log_level}")
 ```
+HPA
+
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-app-hpa
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+```
 
 
 
