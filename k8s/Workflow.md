@@ -163,6 +163,113 @@ spec:
 **externalName** — This is the DNS name of your RDS instance. You get this from the RDS dashboard.
 
 
+**RBAC**
+
+# Core RBAC Components
+
+| Component | Description |
+| --- | --- |
+| Role | Defines a set of permissions (verbs + resources) within a namespace. |
+| ClusterRole | Same as Role but applies to all namespaces or cluster-wide resources. |
+| RoleBinding | Grants a Role to a user/group/service account within a namespace. |
+| ClusterRoleBinding | Grants a ClusterRole at the cluster level. |
+
+```yaml
+mapRoles:
+  - rolearn: arn:aws:iam::123456789012:role/EKSAdminRole
+    username: admin
+    groups:
+      - system:masters
+```
+you have the above role, then you bind it 
+
+```yaml
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-pods
+  namespace: dev
+subjects:
+- kind: User
+  name: jane
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
+```
+Instead of giving IAM roles to EC2 nodes, you can assign IAM roles directly to pods using IRSA.
+
+IAM role maps to dev-group
+
+RBAC Role only allows actions in dev namespace
+
+Prevents access to prod workloads
+
+**Namespace level access**
+
+1. Create IAM Role for Developers
+
+2. Map IAM Role to Kubernetes Group using aws-auth
+
+ **kubectl edit configmap aws-auth -n kube-system**
+
+       ---> Add your IAM role under mapRoles:
+
+3. Create RBAC role in Dev namespace
+
+```yaml
+# role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: dev
+  name: dev-access
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "configmaps"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+```
+4. Bind the Role to the Group
+
+ ```yaml
+# rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dev-access-binding
+  namespace: dev
+subjects:
+- kind: Group
+  name: dev-group
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: dev-access
+  apiGroup: rbac.authorization.k8s.io
+```
+
+Since RBAC is deny-by-default, not granting a RoleBinding in prod means:
+
+They can’t list, create, or delete anything in prod
+
+Even if they try: kubectl get pods -n prod → ❌ Forbidden
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
 
