@@ -87,5 +87,35 @@ result = text.strip("-")
 print(f"'{result}'")
 ```
 
+**json parser**
+
+**json.load()**  --> Read from a file 
+
+```python
+import json
+
+with open('data.json','r') as file:
+    file = json.load(f)
+```
+
+**json.loads()** --> read from a string
+
+```python
+import json
+json_string = '{"name": "Alice", "age": 30}'
+data = json.loads(json_string)
+```
+
+**json.dumps()** --> convert python object to json
+
+```python
+import json
+data = {"name": "Alice", "age": 30}
+json_string = json.dumps(data)
+```
+
+
+
+
 
 
