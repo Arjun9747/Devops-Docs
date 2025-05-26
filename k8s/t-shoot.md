@@ -102,6 +102,39 @@ top
 df -h
 free -m
 ```
+**"Failed to create pod sandbox**
+
+Failed to create pod sandbox" is an error message that typically occurs in Kubernetes when the container runtime (e.g., Docker, containerd) is unable to create the network namespace (sandbox) for a pod.
+
+```bash
+kubectl get pods -A
+kubectl describe pod <pod-name> -n <namespace>
+sudo systemctl status containerd     # or docker
+sudo systemctl restart containerd
+sudo journalctl -u kubelet -f
+sudo journalctl -u containerd -f
+ls /etc/cni/net.d/
+ls /opt/cni/bin/
+top
+df -h
+free -m
+```
+
+**FailedScheduling**
+
+This error occurs when the Kubernetes scheduler is unable to find a suitable node to place a pod.
+
+```bash
+kubectl get pods -A
+kubectl describe pod <pod-name> -n <namespace>
+kubectl get nodes
+kubectl describe node <node-name>
+kubectl top nodes
+kubectl uncordon <node-name>
+kubectl describe node <node-name> | grep -i taints
+```
+
+
 
 
 
