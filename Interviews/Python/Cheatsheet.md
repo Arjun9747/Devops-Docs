@@ -156,6 +156,42 @@ spec:
     kind: Deployment
 ```
 
+**for monitoring system performance**
+
+```python
+import psutil
+
+print("CPU Usage:", psutil.cpu_percent(interval=1), "%")
+print("Memory Usage:", psutil.virtual_memory().percent, "%")
+```
+
+**json loads**
+
+```json
+{"timestamp": "2025-05-26T10:00:00Z", "level": "ERROR", "message": "Failed to connect", "user": "alice"}
+```
+```python
+import json
+
+log_file = 'app.log'
+
+with open(log_file, 'r') as f:
+    for line in f:
+        try:
+            log_entry = json.loads(line)
+            # Extract specific fields
+            timestamp = log_entry.get('timestamp')
+            level = log_entry.get('level')
+            message = log_entry.get('message')
+
+            # Filter only ERROR level logs
+            if level == 'ERROR':
+                print(f"[{timestamp}] ERROR: {message}")
+
+        except json.JSONDecodeError:
+            print("Skipping invalid JSON line")
+```
+
 
 
 
