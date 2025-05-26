@@ -13,8 +13,99 @@ kubectl get events --sort-by='.lastTimestamp'
 kubectl get pod <pod-name> -o yaml
 ```
  Application error -->Crashes due to bugs, missing files, config issues
+ 
 🔢 Bad command/entrypoint-->	Incorrect CMD or ENTRYPOINT in Dockerfile
+
 🔐 Missing secrets/configs-->	App fails due to missing env vars, configs, secrets
+
 📄 Misconfigured volumes-->	App can't access mounted volume path
+
 🛑 Probes fail-->	Liveness/readiness probes fail and restart the pod
+
 🧵 Resource limits -->	OOMKilled if it uses more memory than allowed
+
+**Pod in Pending state**
+
+Pending state means Kubernetes has accepted the pod configuration but hasn’t scheduled it onto a node yet.
+
+🧠 Insufficient resources -->	No node has enough CPU or memory
+
+🛑 Node taints	-->All nodes are tainted and prevent pod scheduling
+
+⚠️ Missing PVC	--> Pod requests a PersistentVolumeClaim that isn't bound
+
+🚫 Wrong nodeSelector/affinity-->	Pod has constraints that no nodes satisfy
+
+🔐 ServiceAccount/Secrets issues--->	Pod depends on secrets or accounts that don’t exist
+
+```bash
+kubectl get pods & nodes
+kubectl get pvc
+kubectl get nodes -o json | jq '.items[].spec.taints'
+kubectl describe nodes | grep -A5 Taints
+```
+
+| Status               | When it Happens                        | What it Means                             |
+| -------------------- | -------------------------------------- | ----------------------------------------- |
+| **ErrImagePull**     | First failed attempt to pull the image | Initial error pulling the container image |
+| **ImagePullBackOff** | After multiple failed attempts         | Kubernetes backing off and retrying pull  |
+
+**Pod stuck in terminating state**
+
+Finalizers blocking deletion  --> manually remove finalizers (force delete) if safe:
+
+Pod stuck due to running processes  [ kubectl delete pod <pod-name> --grace-period=0 --force]
+
+Node or kubelet issues --> unreachable nodes
+
+Network/storage resources hanging --> Vols mounts blocking | unmount 
+
+
+NodeNotReady means Kubernetes has detected that a node is not healthy or unreachable, 
+so it marks the node as NotReady.
+```bash
+kubectl get nodes
+kubectl describe node <node-name>
+sudo systemctl status kubelet
+sudo systemctl restart kubelet
+top
+df -h
+free -m
+sudo systemctl status docker    # or containerd
+sudo journalctl -u kubelet -f
+curl -k https://<api-server-ip>:6443/healthz
+```
+
+**PVC not bound**
+
+PVC (PersistentVolumeClaim) not bound means your claim for storage has not been successfully matched to any PersistentVolume (PV).
+
+```bash
+kubectl get pvc
+kubectl describe pvc <pvc-name>
+kubectl get pv
+kubectl describe pv <pv-name>
+kubectl get storageclass
+```
+**Error syncing pod**
+
+kubelet failed to synchronize the desired state of the pod with the actual state on the node.
+
+```bash
+kubectl get pods -o wide
+kubectl describe pod <pod-name>
+kubectl logs <pod-name>                # If container has started
+sudo journalctl -u kubelet -f          # On node
+sudo systemctl status kubelet
+sudo systemctl status docker           # Or containerd
+top
+df -h
+free -m
+```
+
+
+
+
+
+
+
