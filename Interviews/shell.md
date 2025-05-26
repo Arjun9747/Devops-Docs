@@ -234,8 +234,10 @@ fi
 
 **Find and archive logs older than 7 days**
 
+```shell
 find $LOG_DIR -type f -mtime +7 -exec tar -rvf $BACKUP_DIR/logs_backup_$(date +%F).tar {} \; -exec rm {} \;
 echo "Logs older than 7 days have been backed up and deleted."
+```
 
 -m time 
 -c time -ownership/permission
@@ -246,7 +248,7 @@ echo "Logs older than 7 days have been backed up and deleted."
 **Define the services to check**
 SERVICES=("nginx" "mysql" "redis")
 
-# Loop through each service and check its status
+**Loop through each service and check its status**
 for SERVICE in "${SERVICES[@]}"; do
     if ! systemctl is-active --quiet $SERVICE; then
         echo "$SERVICE is not running, restarting it..."
