@@ -243,12 +243,11 @@ echo "Logs older than 7 days have been backed up and deleted."
 -c time -ownership/permission
 -a time - access time 
 
+**Loop through each service and check its status**
+```shell
 #!/bin/bash
-
-**Define the services to check**
 SERVICES=("nginx" "mysql" "redis")
 
-**Loop through each service and check its status**
 for SERVICE in "${SERVICES[@]}"; do
     if ! systemctl is-active --quiet $SERVICE; then
         echo "$SERVICE is not running, restarting it..."
@@ -258,7 +257,7 @@ for SERVICE in "${SERVICES[@]}"; do
         echo "$SERVICE is running"
     fi
 done
-
+```
 
 
 
