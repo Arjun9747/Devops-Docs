@@ -260,6 +260,16 @@ for SERVICE in "${SERVICES[@]}"; do
 done
 ```
 
+┌──────────── minute (0 - 59)
+│ ┌────────── hour (0 - 23)
+│ │ ┌──────── day of month (1 - 31)
+│ │ │ ┌────── month (1 - 12)
+│ │ │ │ ┌──── day of week (0 - 7) (Sunday is 0 or 7)
+│ │ │ │ │
+│ │ │ │ │
+0 0 * * * /path/to/your/script.sh
+
+
 
 
 
