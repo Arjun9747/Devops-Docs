@@ -192,6 +192,23 @@ with open(log_file, 'r') as f:
             print("Skipping invalid JSON line")
 ```
 
+**Extracting name and skipping first few lines**
+
+```python
+import panda as pd
+import csv
+
+df = pd.read_csv('yourfile.csv',skiprows=3)
+
+with open('yourfile.sv','r') as file:
+    csv_data = csv.reader(file)
+
+next(csv.data)
+next(csv.data)
+
+```
+
+
 
 
 
