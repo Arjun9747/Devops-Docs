@@ -91,6 +91,13 @@ Pickling is the process of serializing a Python object into a byte stream so it 
 
 Unpickling is the reverse — loading the object back from the byte stream to reconstruct the original Python object.
 
+**(args & kwargs)**
+
+When you are not clear about the no. of arguments of a particular functions.
+
+args--> add together values of multiple arguments (list)
+kwargs --> values are dictionary
+
 
 
 
