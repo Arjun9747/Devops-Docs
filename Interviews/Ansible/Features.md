@@ -115,7 +115,7 @@ The regions section specifies the AWS regions to query for EC2 instances.
 
 The filters section specifies a filter to only include instances with the Environment tag set to dev.
 
-**jinja files*
+*jinja files*
 
 Generate config files (nginx.conf, sshd_config, httpd.conf, etc.)
 
@@ -124,3 +124,41 @@ Create scripts dynamically (e.g., startup.sh, install.sh)
 Template cloud init or Terraform variables
 
 Customize email templates, Slack messages, or alerts
+
+*Structure*
+
+name
+
+host
+
+become
+
+vars 
+
+roles 
+
+The lineinfile module is used to ensure a specific line is present, absent, or replaced in a text file on a target machine.
+
+```yaml
+- name: Ensure a line is present in a file
+  ansible.builtin.lineinfile:
+    path: /etc/myconfig.conf
+    line: 'export PATH=/usr/local/bin:$PATH'
+```
+
+*Grouping Host*
+
+Grouping hosts in Ansible means organizing your inventory into groups based on criteria like environment, role, location, OS, etc
+
+| Optimization Technique   | Benefit                            |
+| ------------------------ | ---------------------------------- |
+| Loops                    | Reduce repetition, concise code    |
+| Native modules           | Idempotent and optimized           |
+| Handlers                 | Avoid unnecessary service restarts |
+| Fact caching             | Speed up repeated runs             |
+| Delegation & Async       | Efficient task distribution        |
+| Play-level `become`      | Cleaner, less repetition           |
+| Selective fact gathering | Faster playbook start              |
+| Tags                     | Run partial playbooks              |
+| Roles                    | Modular, reusable code             |
+
