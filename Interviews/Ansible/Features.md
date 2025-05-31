@@ -162,3 +162,27 @@ Grouping hosts in Ansible means organizing your inventory into groups based on c
 | Tags                     | Run partial playbooks              |
 | Roles                    | Modular, reusable code             |
 
+*Delegate*
+
+Sometimes a task must be run on a specific control node or jump host instead of the target host. For example, copying 
+
+files from one host to another, or running a command on the control machine while managing remote hosts.
+
+*Async*
+
+Run tasks asynchronously, allowing the playbook to continue without waiting for the task to finish.
+
+async: maximum time (in seconds) allowed for the task to run
+
+poll: 0: fire and forget (don’t wait for the result)
+
+*Selective Fact Gathering*
+
+Gathering facts can be slow, especially on many hosts or when you don’t need all facts. Selective gathering or disabling it speeds up playbook execution
+
+| Feature                      | Purpose                                         | Example Use Case                          |
+| ---------------------------- | ----------------------------------------------- | ----------------------------------------- |
+| **Delegation**               | Run task on different host (e.g., control node) | Copy files from remote to local           |
+| **Async**                    | Run long tasks without blocking playbook        | Run backup or build jobs in background    |
+| **Selective Fact Gathering** | Speed up execution by limiting gathered facts   | Skip gathering or gather only needed info |
+
