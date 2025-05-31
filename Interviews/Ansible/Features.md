@@ -168,6 +168,8 @@ Sometimes a task must be run on a specific control node or jump host instead of 
 
 files from one host to another, or running a command on the control machine while managing remote hosts.
 
+Use fallback nodes or run recovery steps elsewhere
+
 *Async*
 
 Run tasks asynchronously, allowing the playbook to continue without waiting for the task to finish.
@@ -202,6 +204,15 @@ Fact Caching stores these gathered facts locally or remotely, so subsequent play
 
 Ansible is agentless, meaning it doesn't require any agent (like Puppet or Chef) to be installed on the managed nodes.
 
+*Error Handling*
+
+ignore-error: yes --> Allows a task to continue even if it fails.
+
+failed_when -->  Override failure condition (return failure even if Ansible thinks it's a success—or vice versa).
+
+block, rescue, and always  --> Structure to handle try-catch-finally logic.
+
+ansible.builtin.assert --> - disk_space.stdout | int > 1024
 
 
 
