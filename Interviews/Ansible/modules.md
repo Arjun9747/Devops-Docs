@@ -81,6 +81,38 @@ ansible.builtin.fail / ansible.builtin.debug
 
 Detect failures and notify accordingly.
 
+**Scenario**
+
+- name: Disable root SSH login
+- name: Ensure ufw is installed and configured | Uncomplicated Firewall. It simplifies firewall management for users who
+  
+         may not be comfortable writing complex iptables rules directly, making basic firewall configuration accessible and quick.
+
+- name:  Ensure critical services are running (availability)
+
+```yaml
+---
+- name: Ensure critical services are running and enabled
+  hosts: all
+  become: yes
+
+  vars:
+    critical_services:
+      - sshd
+      - firewalld
+      - cron
+
+  tasks:
+    - name: Ensure critical services are running and enabled
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      loop: "{{ critical_services }}"
+```
+
+
+
 
 
   
