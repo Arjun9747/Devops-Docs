@@ -86,7 +86,7 @@ Detect failures and notify accordingly.
 - name: Disable root SSH login
 - name: Ensure ufw is installed and configured | Uncomplicated Firewall. It simplifies firewall management for users who
   
-         may not be comfortable writing complex iptables rules directly, making basic firewall configuration accessible and quick.
+  may not be comfortable writing complex iptables rules directly, making basic firewall configuration accessible and quick.
 
 - name:  Ensure critical services are running (availability)
 
