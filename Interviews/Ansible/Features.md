@@ -186,3 +186,22 @@ Gathering facts can be slow, especially on many hosts or when you don’t need a
 | **Async**                    | Run long tasks without blocking playbook        | Run backup or build jobs in background    |
 | **Selective Fact Gathering** | Speed up execution by limiting gathered facts   | Skip gathering or gather only needed info |
 
+*Serial*
+
+The serial keyword lets you run the playbook tasks on a limited number of hosts at a time (batch size) instead of all hosts simultaneously.
+
+Useful for rolling updates or staggered deployments to reduce risk.
+
+serial: 1 — Run on one host at a time, moving to the next only after success.
+
+serial: 5 — Run on 5 hosts in parallel batches.
+
+serial: 50% — Run on half of the hosts in each batch.
+
+Fact Caching stores these gathered facts locally or remotely, so subsequent playbook runs can reuse the facts without gathering them again, speeding up execution.
+
+Ansible is agentless, meaning it doesn't require any agent (like Puppet or Chef) to be installed on the managed nodes.
+
+
+
+
