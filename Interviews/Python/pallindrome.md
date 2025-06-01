@@ -28,4 +28,20 @@ def palindrome(s):
 s = "malayalam"
 palindrome(s)
 ```
+*While loop*
+```python
+def palindrome(s):
+    n = len(s)
+    first = 0
+    last = n - 1
+    while first <= last:
+        if s[first] == s[last]:
+            first += 1
+            last -= 1
+        else:
+            return False
+    return True
 
+s = "malayalam"
+print(palindrome(s))  # Output: True
+```
