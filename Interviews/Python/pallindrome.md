@@ -28,3 +28,4 @@ def palindrome(s):
 s = "malayalam"
 palindrome(s)
 ```
+
