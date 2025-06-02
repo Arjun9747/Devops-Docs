@@ -45,3 +45,21 @@ def palindrome(s):
 s = "malayalam"
 print(palindrome(s))  # Output: True
 ```
+
+*While loop palindrome number*
+
+```python
+def palindrome(num):
+    temp = num #146
+    rev = 0
+    while (temp >0):
+        digit = temp%10 #6
+        rev = rev * 10 + digit 
+        #rev = 0 * 10+ 6 = 6 
+        temp = temp //10  # 14
+    if num == rev:
+        print("palindrome")
+    else:
+        print("not a palindomr")
+palindrome(4540)
+```
