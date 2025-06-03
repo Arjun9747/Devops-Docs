@@ -133,6 +133,13 @@ PID USER  PR  NI  VIRT  RES  SHR  S  %CPU  %MEM  TIME+  COMMAND
 4.  Memory Usage
 5.  Swap Usage
 6.  Process List
+
+**iostat**
+
+![image](https://github.com/user-attachments/assets/0783589b-5ec3-4104-8ace-3f523e7437b1)
+
+
+
    
 
 
