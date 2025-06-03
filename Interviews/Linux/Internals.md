@@ -153,10 +153,10 @@ avg-cpu:  %user  %nice %system %iowait  %steal  %idle
 
    2. Device Utilization Section
 
-  ```arundio
+ 
   Device            tps    kB_read/s  kB_wrtn/s  kB_read  kB_wrtn
   nvme0n1           55.0     1000.5     2048.3    504320   1034240
-```
+
 
 * Device: Disk or partition.
 * tps (transfers per second): Number of I/O requests per second.
