@@ -87,7 +87,7 @@ top - 12:45:27 up 5 days,  4:32,  2 users,  load average: 0.10, 0.08, 0.12
 * Stopped: Manually stopped.
 * Zombie: Dead processes not yet cleaned up.
 
-```scss
+```bash
 %Cpu(s):  5.2 us,  1.0 sy,  0.0 ni, 93.0 id,  0.6 wa,  0.0 hi,  0.2 si,  0.0 st
 ```
 
@@ -133,7 +133,7 @@ PID USER  PR  NI  VIRT  RES  SHR  S  %CPU  %MEM  TIME+  COMMAND
 4.  Memory Usage
 5.  Swap Usage
 6.  Process List
-7.  
+   
 
 
 
