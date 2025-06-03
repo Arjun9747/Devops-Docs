@@ -87,6 +87,31 @@ top - 12:45:27 up 5 days,  4:32,  2 users,  load average: 0.10, 0.08, 0.12
 * Stopped: Manually stopped.
 * Zombie: Dead processes not yet cleaned up.
 
+```scss
+%Cpu(s):  5.2 us,  1.0 sy,  0.0 ni, 93.0 id,  0.6 wa,  0.0 hi,  0.2 si,  0.0 st
+```
+
+* us (user): Time spent on user processes.
+* sy (system): Time on kernel processes.
+* ni (nice): Time on low-priority user processes.
+* id (idle): Idle time.
+* wa (wait): Time waiting on I/O.
+* hi/si (hardware/software interrupts): Time handling interrupts.
+* st (steal time): Time stolen by hypervisor in a virtual environment.
+
+
+```bash
+MiB Mem :  7984.4 total,  1200.0 free,  3450.0 used,  3334.4 buff/cache
+```
+* total: Total physical memory.
+* free: Unused memory.
+* used: In use (not including cache).
+* buff/cache: Memory used for disk cache and buffers.
+
+
+
+
+
 
 
 
