@@ -166,6 +166,39 @@ avg-cpu:  %user  %nice %system %iowait  %steal  %idle
 
 **Your disk space is full. How will you boot into the OS?**
 
+Boot into Rescue or Recovery Mode
+
+On cloud (AWS EC2 / GCP / Azure):
+
+Detach the root volume.
+
+Attach it to another instance as a secondary volume.
+
+Mount it and clean up space.
+
+2. Mount the Root Filesystem (If Needed)
+3. Find Large Files
+
+```bash
+du -h --max-depth=1 / | sort -hr | head -20
+```
+4. Clean up disk space
+
+```bash
+journalctl --vacuum-time=7d
+rm -rf /var/log/*.gz /var/log/*.[0-9]
+```
+
+5. Set up logrotate.
+
+Monitor with cron + alert if disk usage > threshold.
+
+Move logs to external storage (e.g., S3).
+
+Logrotate is a utility that helps manage log files by rotating, compressing, and removing them
+
+
+
 
 
 
