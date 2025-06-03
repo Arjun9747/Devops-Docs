@@ -197,6 +197,64 @@ Move logs to external storage (e.g., S3).
 
 Logrotate is a utility that helps manage log files by rotating, compressing, and removing them
 
+🔁 Swap Memory
+
+Definition: Swap is a portion of the hard drive used as virtual memory when RAM is full.
+
+Purpose: Helps prevent out-of-memory (OOM) errors by temporarily moving inactive pages from RAM to disk.
+
+Downside: Slower than RAM, can cause performance issues if overused.
+
+📄 Paging
+
+Definition: Paging is a memory management scheme that breaks physical memory into fixed-size blocks (pages).
+
+Use Case: Allows the OS to use non-contiguous memory and supports virtual memory (including swap).
+
+Mechanism: Pages can be swapped in/out of RAM and disk (swap).
+
+🧟 Zombie Process
+
+Definition: A process that has completed execution but still has an entry in the process table.
+
+Why?: The parent process hasn't read its exit status using wait().
+
+```bash
+ps aux | grep 'Z'
+```
+
+🧒 Orphan Process
+
+Definition: A process whose parent has exited before the child process.
+
+Handling: Automatically adopted by init or systemd (PID 1).
+
+No issue: Orphans are cleaned up properly unlike zombies.
+
+📞 System Calls
+
+Definition: System calls are the interface between a user-space application and the Linux kernel.
+
+Purpose: To request kernel services like file operations, memory management, process control, etc.
+
+Examples:
+
+open(), read(), write(), fork(), exec(), exit()
+
+⚙️ How System Calls Are Initiated
+
+User process invokes a standard library function (e.g., read()).
+
+Library wrapper triggers a software interrupt or special CPU instruction (e.g., int 0x80, syscall).
+
+CPU switches to kernel mode, and jumps to the kernel’s system call handler.
+
+The kernel executes the requested operation.
+
+Control is returned to the user space with the result or an error code.
+
+
+
 
 
 
