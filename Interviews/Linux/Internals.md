@@ -253,6 +253,52 @@ The kernel executes the requested operation.
 
 Control is returned to the user space with the result or an error code.
 
+*Kernel Panic Error*
+
+A kernel panic occurs when the Linux kernel detects a fatal error from which it cannot safely recover — often due to hardware failure, corrupt drivers, bad kernel updates, or critical file system issues.
+
+Check Boot Logs
+
+```bash
+cat /var/log/kern.log
+cat /var/log/syslog
+journalctl -k -b -1   # Show kernel logs from last boot
+```
+
+ Use Recovery Mode / Rescue Mode
+
+ Reboot the system.
+
+In GRUB, select Advanced Options → choose a previous kernel version or recovery mode.
+
+Use root shell to investigate.
+
+🛠️ 4. Common Kernel Panic Causes & Fixes
+
+
+Boot into recovery and run:
+
+```bash
+fsck /dev/sdX
+```
+ Invalid initramfs or grub config
+
+ ```bash
+sudo update-initramfs -u
+```
+
+| Task                 | Command                 |
+| -------------------- | ----------------------- |
+| Filesystem Check     | `fsck /dev/sdX`         |
+| Regenerate Initramfs | `update-initramfs -u`   |
+| Check RAM            | `memtest86+`            |
+| View Last Boot Logs  | `journalctl -k -b -1`   |
+| Boot Older Kernel    | Select via GRUB         |
+| View GRUB config     | `cat /etc/default/grub` |
+
+
+
+
 
 
 
