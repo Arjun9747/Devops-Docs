@@ -64,3 +64,31 @@ Handles early boot tasks
 5. Root file system is mounted
 6. System transitions to real root file system
 
+
+**Shared the screenshot of output of `top` command and asked me to explain the terms that I understand.**
+
+![image](https://github.com/user-attachments/assets/621601cb-759a-441b-be65-e6a7fe0af74e)
+
+
+```bash
+top - 12:45:27 up 5 days,  4:32,  2 users,  load average: 0.10, 0.08, 0.12
+```
+* 12:45:27 → Current time.
+* up 5 days, 4:32 → System uptime (since last reboot).
+* 2 users → Number of users currently logged in.
+* load average: 0.10, 0.08, 0.12 → CPU load over 1, 5, and 15 minutes.
+
+  ``arundio
+  Tasks: 120 total, 1 running, 119 sleeping, 0 stopped, 0 zombie
+```
+* Total: Number of processes.
+* Running: Actively using CPU.
+* Sleeping: Idle, waiting for an event.
+* Stopped: Manually stopped.
+* Zombie: Dead processes not yet cleaned up.
+
+
+
+
+  
+
