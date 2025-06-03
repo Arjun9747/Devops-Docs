@@ -387,6 +387,64 @@ A command-line utility that reports system virtual memory, processes, CPU activi
 
 The System Activity Reporter collects, reports, and saves system activity information.
 
+**Client cannot login to a server**
+
+1. Ping the server:
+2. SSH
+
+If the server is not reachable or SSH port is blocked, check the network, firewall, or security group rules (cloud).
+
+Check SSH Service on the Server
+
+Check if sshd is running:
+
+Start/Restart SSH service if needed:
+
+Check Server Authentication Logs
+
+sudo tail -f /var/log/auth.log        # Ubuntu/Debian
+sudo tail -f /var/log/secure          # RHEL/CentOS
+
+Is the user account locked?
+
+sudo passwd -S <username>
+
+Unlock if needed:
+
+sudo passwd -u <username>
+
+Expired password?
+
+sudo chage -l <username>
+
+grep <username> /etc/passwd --> Check home directory and shell:
+
+Does the user have a valid shell (e.g., /bin/bash, not /sbin/nologin)?
+
+ Step 6: Check PAM or SSH Configurations
+ 
+Review /etc/ssh/sshd_config for:
+
+PermitRootLogin
+
+AllowUsers or DenyUsers
+
+PasswordAuthentication (enabled if using passwords)
+
+PubkeyAuthentication (enabled for key-based)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
