@@ -138,6 +138,34 @@ PID USER  PR  NI  VIRT  RES  SHR  S  %CPU  %MEM  TIME+  COMMAND
 
 ![image](https://github.com/user-attachments/assets/0783589b-5ec3-4104-8ace-3f523e7437b1)
 
+CPU statistics ,I/O statistics for devices and partitions
+
+ 1. CPU Utilization Section
+
+```perl
+avg-cpu:  %user  %nice %system %iowait  %steal  %idle
+           5.10   0.00    1.23    2.01     0.00   91.66
+```
+* %user: Time CPU spends on user processes.
+* %system: Time on kernel processes.
+* %iowait: Time spent waiting for I/O. {🚨 If this is high (> 10–15%), it may indicate disk I/O bottlenecks}
+* %idle: Idle time — should be high on healthy systems.
+
+   2. Device Utilization Section
+
+  ```bash
+  Device            tps    kB_read/s  kB_wrtn/s  kB_read  kB_wrtn
+nvme0n1           55.0     1000.5     2048.3    504320   1034240
+```
+
+* Device: Disk or partition.
+* tps (transfers per second): Number of I/O requests per second.
+* kB_read/s / kB_wrtn/s: Throughput (in KB) per second.
+* kB_read / kB_wrtn: Total data read/written (since boot or since stats reset)
+
+
+
+
 
 
    
