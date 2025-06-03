@@ -375,6 +375,20 @@ The total number of inodes is fixed at filesystem creation, so running out of in
 
 Inode locality and how they are stored can affect performance, especially in directories with many files, since the system must read multiple inodes during directory traversal or metadata operations.
 
+**htop**
+
+An interactive, real-time process viewer and system monitor (an improved alternative to top).
+
+**vmstat**
+
+A command-line utility that reports system virtual memory, processes, CPU activity, paging, block I/O, traps, and system uptime statistics.
+
+**sar**
+
+The System Activity Reporter collects, reports, and saves system activity information.
+
+
+
 
 
 
