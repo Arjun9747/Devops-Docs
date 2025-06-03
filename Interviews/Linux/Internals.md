@@ -45,4 +45,22 @@ Detach root volume → Attach to another instance → Mount → Fix.
 | Rebuild initramfs  | `dracut --force` / `update-initramfs -u` |
 | Drivers            | Verify required drivers in kernel/initrd |
 
+Initramfs (short for "initial RAM file system") is a temporary root file system that is loaded into memory during the Linux boot process. It's a crucial component of the boot process, especially in modern Linux systems.
+
+Provides a temporary root file system
+
+Loads necessary modules
+
+Mounts the root file system
+
+Handles early boot tasks
+
+**How does Initramfs work?**
+
+1. Boot loader loads the kernel and Initramfs:
+2. Kernel initializes
+3. Initramfs is mounted:
+4. Initramfs loads necessary modules
+5. Root file system is mounted
+6. System transitions to real root file system
 
