@@ -78,7 +78,7 @@ top - 12:45:27 up 5 days,  4:32,  2 users,  load average: 0.10, 0.08, 0.12
 * 2 users → Number of users currently logged in.
 * load average: 0.10, 0.08, 0.12 → CPU load over 1, 5, and 15 minutes.
 
-  ``arundio
+  ```arundio
   Tasks: 120 total, 1 running, 119 sleeping, 0 stopped, 0 zombie
 ```
 * Total: Number of processes.
