@@ -108,6 +108,34 @@ MiB Mem :  7984.4 total,  1200.0 free,  3450.0 used,  3334.4 buff/cache
 * used: In use (not including cache).
 * buff/cache: Memory used for disk cache and buffers.
 
+```bash
+MiB Swap: 2048.0 total, 2048.0 free, 0.0 used, 600.0 avail Mem
+```
+* Shows swap space stats.
+* If swap used is high → possible memory pressure.
+
+```bash
+PID USER  PR  NI  VIRT  RES  SHR  S  %CPU  %MEM  TIME+  COMMAND
+```
+* PID: Process ID.
+* USER: Owner.
+* PR/NI: Priority/Nice value.
+* VIRT/RES/SHR: Virtual, resident, shared memory
+* S: Process state (R = running, S = sleeping, Z = zombie).
+* %CPU: CPU usage.
+* %MEM: Memory usage.
+* TIME+: Total CPU time used.
+* COMMAND: Command name or path.
+
+1. Top Header: System Overview
+2.  Tasks Section
+3.  CPU Usage
+4.  Memory Usage
+5.  Swap Usage
+6.  Process List
+7.  
+
+
 
 
 
