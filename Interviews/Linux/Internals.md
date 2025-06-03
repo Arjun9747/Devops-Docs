@@ -26,3 +26,23 @@ Uses the rmdir() or unlinkat() system call for directories.
 
 Only empty directories can be deleted using rmdir(), but rm -r ensures subcontents are deleted first.
 
+*While booting, the kernel is unable to load the file system. How will you troubleshoot*
+
+**For AWS EC2 Instances**
+
+Use EC2 Serial Console (for Amazon Linux 2 and Ubuntu).
+
+Check System Logs from AWS Console.
+
+Detach root volume → Attach to another instance → Mount → Fix.
+
+| Check              | Command/Method                           |
+| ------------------ | ---------------------------------------- |
+| Boot Logs          | Watch boot screen / serial console       |
+| fstab              | `cat /mnt/root/etc/fstab`                |
+| Disk health        | `fsck /dev/sdX`                          |
+| Initramfs contents | `lsinitrd`                               |
+| Rebuild initramfs  | `dracut --force` / `update-initramfs -u` |
+| Drivers            | Verify required drivers in kernel/initrd |
+
+
