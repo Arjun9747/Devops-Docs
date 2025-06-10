@@ -14,4 +14,12 @@ Balance the use of Spot and on-demand instances
 
 Optimize off-peak hours by scaling down or shutting down unused workloads
 
+for DEV only single AZ is required for RDS 
+
+Resize idel EBS instance and remove it
+
+
+
+
+
 
