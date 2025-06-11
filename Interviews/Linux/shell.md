@@ -157,12 +157,6 @@ wait $!  # wait for the last background job to complete
 
 wait 1234  # wait for process with PID 1234 to complete
 
-| Command | Description | Example |
-| --- | --- | --- |
-| `cut` | Extract specific fields from lines | `cut -d':' -f1 /etc/passwd` (Get usernames) |
-| `awk` | Pattern scanning and processing | `awk '{print $1, $3}' users.txt` (Print 1st & 3rd columns) |
-| `sed` | Stream editor for modifying text | `sed 's/error/ERROR/g' log.txt` (Replace 'error' with 'ERROR') |
-
 ```shell
 admin:x:0:0:root:/root:/bin/bash
 ```
@@ -174,6 +168,11 @@ admin:x:0:0:root:/root:/bin/bash
 | `${var#prefix}`    | Remove shortest match from start | `"v1.2.3-release"`      | `"1.2.3-release"` |
 | `${var##prefix}`   | Remove longest match from start  | `"v1.2.3-release"`      | `"release"`    |
 
+| Command | Description | Example |
+| --- | --- | --- |
+| `cut` | Extract specific fields from lines | `cut -d':' -f1 /etc/passwd` (Get usernames) |
+| `awk` | Pattern scanning and processing | `awk '{print $1, $3}' users.txt` (Print 1st & 3rd columns) |
+| `sed` | Stream editor for modifying text | `sed 's/error/ERROR/g' log.txt` (Replace 'error' with 'ERROR') |
 path="abcd.txt"
 
 echo "${path%.txt}"  # Output: abcd
