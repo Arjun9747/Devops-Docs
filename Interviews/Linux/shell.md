@@ -270,6 +270,23 @@ done
 0 0 * * * /path/to/your/script.sh
 ```
 
+*To get files modified (mtime) or metadata-changed (ctime) in the last 7 days*
+
+```bash
+#!bin/bash
+
+#default directory is current directory
+DIR = "${1:-.}"
+
+find $DIR -type f \(-mtime -7 -o -ctime -7"\) | while -r file; do
+mtime = $(stat -c "%y" "$file")
+ctime = $(stat -c "%z" "$file")
+
+echo "$mtime"
+echo "$ctime"
+done
+```
+
 
 
 
