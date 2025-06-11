@@ -278,7 +278,10 @@ done
 #default directory is current directory
 DIR = "${1:-.}"
 
+#/..../ --> grouping , "-o" is OR condition 
 find $DIR -type f \(-mtime -7 -o -ctime -7"\) | while -r file; do
+
+#stat --> give all info of files and %y is human readable format
 mtime = $(stat -c "%y" "$file")
 ctime = $(stat -c "%z" "$file")
 
