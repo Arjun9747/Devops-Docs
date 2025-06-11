@@ -214,5 +214,44 @@ block, rescue, and always  --> Structure to handle try-catch-finally logic.
 
 ansible.builtin.assert --> - disk_space.stdout | int > 1024
 
+*Facts*
+
+In Ansible, facts are pieces of information automatically discovered about your managed nodes (hosts). These include system properties like:
+
+OS type, IP addresses, hostname
+
+Memory, CPU count
+
+Network interfaces
+
+Mount points
+
+and many more…
+
+These facts are gathered automatically by default using the setup module.
+
+```yaml
+- name: Example using Ansible facts
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Print the OS type
+      debug:
+        msg: "This machine is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
+
+    - name: Print IP address
+      debug:
+        msg: "Primary IP address is {{ ansible_default_ipv4.address }}"
+```
+| Fact                           | Description          |
+| ------------------------------ | -------------------- |
+| `ansible_os_family`            | RedHat, Debian, etc. |
+| `ansible_distribution`         | Ubuntu, CentOS, etc. |
+| `ansible_hostname`             | Hostname             |
+| `ansible_all_ipv4_addresses`   | All IPv4 addresses   |
+| `ansible_processor_cores`      | Number of cores      |
+| `ansible_memory_mb.real.total` | Total memory in MB   |
+
+
 
 
