@@ -458,6 +458,7 @@ list
 p - process
 e - everything
 f - full format
+```
 
 | Part of Command | Letter | Meaning                          |
 | --------------- | ------ | -------------------------------- |
@@ -467,7 +468,16 @@ f - full format
 | `grep xyz`      | —      | Search for `"xyz"` in the output |
 
 
+Linux Boot
 
+```markdown
+✅ PID 1: init or systemd
+The very first process started by the Linux kernel once it finishes hardware initialization is /sbin/init or /lib/systemd/systemd, depending on the Linux distribution.
+
+This process is always assigned PID 1.
+
+
+```
 
 
 
