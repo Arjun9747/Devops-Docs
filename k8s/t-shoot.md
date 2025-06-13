@@ -134,6 +134,45 @@ kubectl uncordon <node-name>
 kubectl describe node <node-name> | grep -i taints
 ```
 
+**Pod Utilization**
+
+```bash
+kubectl top pods --all-namespaces
+```
+**Dynatrace**
+
+Connect EKS cluster to Dynatrace via oneAgent 
+
+Create Namespace 
+
+Paste the dynatrace token
+
+Enable Workload and Pod Resource Monitoring using Dynakube 
+
+```yaml
+# values.yaml (or --set parameters in helm)
+dynakube:
+  apiUrl: "https://<your-env>.live.dynatrace.com/api"
+  oneAgent:
+    classicFullStack:
+      enabled: true
+  kubeMon:
+    enabled: true
+    # Optional but recommended for resource metrics:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 200Mi
+```
+
+Custom Queries
+
+```text
+builtin:kubernetes.pod.cpu.usage
+builtin:kubernetes.pod.memory.usage
+```
+
+
 
 
 
