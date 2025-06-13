@@ -157,5 +157,28 @@ hostnames:
   - private-ip-address
 ```
 
+**Fail**
+
+The fail module is used to fail a playbook when a certain condition is met. It can be used to stop the playbook execution when an error occurs or when a specific condition is not met.
+```yaml
+- name: Fail if the variable is not defined
+  fail:
+    msg: "The variable 'my_var' is not defined"
+  when: my_var is not defined
+```
+
+**assert**
+
+The assert module is used to verify that a certain condition is met. If the condition is not met, the playbook will fail.
+
+```yaml
+- name: Ensure /etc/passwd is not world-writable
+  assert:
+    that: stat_passwd.mode != '0666'
+    fail_msg: "/etc/passwd should not be world-writable"
+```
+
+Use assert for checks and validations, and fail for hard stops with conditions, often combined with when
+
 
 
