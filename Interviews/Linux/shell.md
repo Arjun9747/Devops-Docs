@@ -312,6 +312,13 @@ your_app | while read -r line; do
 done
 ```
 
+| Part             | Meaning                                                                                                                                                                     |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-o`             | Only output the matching **part** of the line (not the whole line)                                                                                                          |
+| `-P`             | Use **Perl-compatible regular expressions** (enables `\K`, lookaheads, etc.)                                                                                                |
+| `'status=\K\S+'` | Match a pattern where:<br> - `status=` is the prefix<br> - `\K` tells `grep` to **"forget"** everything before it<br> - `\S+` matches one or more non-whitespace characters |
+
+
 
 
 
