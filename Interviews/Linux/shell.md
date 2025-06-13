@@ -289,6 +289,31 @@ echo "$ctime"
 done
 ```
 
+** read the standard outputof an application and print a line when a particular field when it changes**
+
+```lua
+timestamp=1620 status=running load=0.6
+timestamp=1621 status=running load=0.7
+timestamp=1622 status=stopped load=0.5
+timestamp=1623 status=stopped load=0.4
+timestamp=1624 status=running load=0.8
+```
+
+```bash
+#!/bin/bash
+
+last_status=""
+your_app | while read -r line; do
+  status=$(echo "$line" | grep -oP 'status=\K\S+')
+  if [[ "$status" != "$last_status" ]]; then
+    echo "$line"
+    last_status="$status"
+  fi
+done
+```
+
+
+
 
 
 
