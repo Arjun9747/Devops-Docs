@@ -47,6 +47,131 @@ Deadlock Detection and Recovery – Periodically check for deadlocks and termina
 A semaphore is a synchronization primitive used to manage access to a shared resource in concurrent systems.
 
 
+| Cause               | Symptom                         | Diagnostic                      |
+| ------------------- | ------------------------------- | ------------------------------- |
+| High CPU usage      | High load, `%us` or `%sy` high  | `top`, `perf top`, `ps`         |
+| Disk I/O wait       | `%wa` high, `D` state processes | `iotop`, `iostat`, `dmesg`      |
+| Memory pressure     | Swap usage, OOM kills           | `free -h`, `dmesg`, `vmstat`    |
+| Network issues      | Slow responses, timeouts        | `netstat`, `ping`, `tcpdump`    |
+| NFS or EBS problems | Hanging processes               | `dmesg`, `strace`, `mount` info |
+
+```markdown
+1. Basic System Checks (User Space)
+Start from user-level tools to get an overview:
+
+top / htop: Check CPU, memory, load average, process states.
+
+uptime: Gives you load averages (1, 5, 15 minutes).
+
+vmstat 1: See CPU, I/O, memory, swap every second.
+
+iostat -xz 1: Shows disk I/O performance.
+
+free -h: Check memory and swap usage.
+
+df -h: Disk space usage.
+
+dmesg | tail: Look for recent kernel errors.
+
+journalctl -p err -b: Boot errors from the journal.
+
+2. Understand Load Average
+Load average > number of cores = system is busy
+Check with nproc or lscpu how many CPUs are available.
+
+High load can come from:
+
+CPU-bound processes
+
+I/O wait (disk/network bottlenecks)
+
+Blocked processes
+
+3. Identify CPU Bottlenecks
+top or htop
+Look for %us (user), %sy (system), %wa (I/O wait), %id (idle)
+
+If %wa is high → Disk I/O problem
+
+If %sy is high → Kernel or system call bottlenecks
+
+perf top
+Shows which kernel functions consume CPU (need perf installed)
+
+4. Check for Disk I/O Issues
+iostat -xz 1
+await: High value → high latency
+
+%util: Close to 100% → disk is fully used
+
+tps and kB_read/s, kB_wrtn/s show load pattern
+
+iotop
+Real-time I/O usage by processes
+
+blktrace, bpftrace (advanced)
+For kernel-level block I/O tracing
+
+5. Check for Memory/Swap Issues
+free -h
+Check available memory and swap usage
+
+vmstat 1
+Look for high si (swap in) / so (swap out)
+
+High cs (context switches) could indicate thrashing
+
+sar -B
+Page faults and swapping metrics
+
+cat /proc/meminfo
+Deeper memory stats from kernel
+
+6. Investigate Process Scheduling
+top → Shift+H
+Show threads; check if threads are blocked or consuming CPU
+
+ps -eo pid,ppid,stat,ni,pri,cmd --sort=-pri
+See process priorities
+
+sched_debug (kernel scheduler)
+bash
+Copy
+Edit
+cat /proc/sched_debug
+See CPU run queues, scheduling delays
+
+7. Check for Blocked Processes (D State)
+ps aux | awk '$8 ~ /D/ { print }'
+D state = uninterruptible sleep, often due to I/O
+
+If many processes are stuck in D, check:
+
+Disk failure (dmesg)
+
+NFS/network mounts
+
+File system locks
+
+8. Network Latency / Bottleneck
+ss -tuan
+See open sockets
+
+netstat -s
+TCP errors, retransmissions
+
+sar -n DEV 1 or ifstat
+Monitor NIC throughput
+
+ping, traceroute, mtr
+Latency and path issues
+
+9. Advanced Kernel Tools
+ftrace, bpftrace, ebpf, systemtap
+Trace kernel functions, syscalls, events
+```
+
+
 
 
 
