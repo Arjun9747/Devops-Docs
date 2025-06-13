@@ -515,6 +515,18 @@ When set on a directory, only the file's owner, the directory's owner, or root c
 This is useful for shared directories like /tmp, where multiple users need to write files, but should not delete each other’s files.
 ```
 
+| Signal | Name      | Description                         | Default Action               |
+| ------ | --------- | ----------------------------------- | ---------------------------- |
+| 1      | `SIGHUP`  | Hangup (e.g., terminal closed)      | Terminate                    |
+| 2      | `SIGINT`  | Interrupt (e.g., Ctrl+C)            | Terminate                    |
+| 9      | `SIGKILL` | Kill immediately                    | Terminate (cannot be caught) |
+| 15     | `SIGTERM` | Termination request                 | Terminate                    |
+| 18     | `SIGCONT` | Continue if stopped                 | Continue execution           |
+| 19     | `SIGSTOP` | Stop the process (pause it)         | Stop (cannot be ignored)     |
+| 11     | `SIGSEGV` | Segmentation fault (invalid memory) | Terminate + Core Dump        |
+
+
+
 
 
 
