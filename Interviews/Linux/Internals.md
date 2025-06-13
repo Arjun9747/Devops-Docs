@@ -473,11 +473,34 @@ Linux Boot
 ```markdown
 ✅ PID 1: init or systemd
 The very first process started by the Linux kernel once it finishes hardware initialization is /sbin/init or /lib/systemd/systemd, depending on the Linux distribution.
-
 This process is always assigned PID 1.
-
-
 ```
+
+```markdown
+1. BIOS
+   * POST( Power On Self Test)
+   * Detects HW and locate boot device (HDD,SSD,USB e.t.c)
+2. GRUB
+  * loads from MBR
+  * Load Linux Kernel
+  * Passes control to Kernel
+3. Kernel Init
+  * Initilize HW
+  * Mount Root File system for initramfs
+  * Mounts /proc/sys
+4. Initiramfs
+  * Temp root file system loaded into memory
+  * Perform userspace tasks like scanning vols.
+  * After the root system is founded, gives the control to /sbin/init
+  * initramfs is unmounted and discarded
+5. init or systemd (PID1)
+  * kernel runs /sbin/init or /lib/systemd/systemd
+  * set system-hostname
+  * starts target services (networking/ ssh)
+  * Launch login shells
+6. User login
+  * terminal login prompt
+
 
 
 
