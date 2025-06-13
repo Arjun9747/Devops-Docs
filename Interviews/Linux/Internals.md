@@ -334,28 +334,37 @@ ls -i myfile.txt  --> To view
 
 1. Inodes and File System Performance
 Access Speed:
+
 When you access a file, the system looks up the directory entry (file name) to get the inode number, then uses the inode to find the file data blocks. This two-step lookup is efficient and allows fast metadata access without scanning file contents.
 
 Metadata Operations:
+
 Operations like checking permissions, timestamps, or ownership only involve reading the inode — no need to read the actual file data, which improves speed.
 
 File System Limits:
+
 The total number of inodes is fixed at filesystem creation. If you run out of inodes, you cannot create new files even if disk space is available, which can degrade performance or cause errors.
 
 Fragmentation:
+
 Because inode data is separate from file data, fragmentation affects data blocks but not inode storage. However, if metadata operations involve many files, inode locality can impact performance (e.g., many small files in one directory).
 
 2. Inodes and File Deletion Behavior
+   
 Deleting a File:
+
 When you delete (unlink) a file, the system removes the directory entry linking the file name to the inode and decreases the inode's link count.
 
 When is the inode freed?
+
 The inode (and its data blocks) is freed only when the link count reaches zero and no process is holding the file open.
 
 Open File Handles:
+
 Even after deletion, if a process still has the file open, the inode remains allocated until the file is closed. This is why deleted files can sometimes still be read by running processes.
 
 3. Inodes and File System Corruption
+   
 Corrupted Inodes:
 Damage to inode structures can cause files to become inaccessible or show incorrect metadata (wrong size, permissions, timestamps).
 
@@ -367,6 +376,7 @@ Orphaned inodes (files without directory entries) found during checks may be mov
 
 
 1. How do inodes relate to file system performance?
+   
 Inodes store all the file metadata (permissions, timestamps, ownership) separately from file names and content, allowing fast access to file information without reading the data itself.
 
 File operations that involve metadata (like permission checks or timestamp reads) are quick because the system accesses only the inode.
@@ -432,6 +442,32 @@ AllowUsers or DenyUsers
 PasswordAuthentication (enabled if using passwords)
 
 PubkeyAuthentication (enabled for key-based)
+
+**ls-altr**
+list 
+| Flag | Meaning                                                                 |
+| ---- | ----------------------------------------------------------------------- |
+| `-a` | Show **all files**, including hidden ones (those starting with `.`)     |
+| `-l` | Use **long listing format** (permissions, owner, size, timestamp, etc.) |
+| `-t` | Sort by **modification time**, newest first                             |
+| `-r` | **Reverse** the order — so oldest files are shown first                 |
+
+✅ ps -ef | grep command
+
+```markdown
+p - process
+e - everything
+f - full format
+
+| Part of Command | Letter | Meaning                          |
+| --------------- | ------ | -------------------------------- |
+| `ps`            | —      | Show running processes           |
+| `-e`            | e      | Show **every process**           |
+| `-f`            | f      | Show in **full format**          |
+| `grep xyz`      | —      | Search for `"xyz"` in the output |
+
+
+
 
 
 
