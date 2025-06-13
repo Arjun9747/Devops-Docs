@@ -505,6 +505,15 @@ This process is always assigned PID 1.
 
 6. User login
   * terminal login prompt
+```
+
+**Stickybit**
+
+```markdown
+When set on a directory, only the file's owner, the directory's owner, or root can delete or rename files in that directory — even if others have write access.
+
+This is useful for shared directories like /tmp, where multiple users need to write files, but should not delete each other’s files.
+```
 
 
 
