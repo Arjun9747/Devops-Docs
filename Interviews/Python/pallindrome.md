@@ -46,6 +46,26 @@ s = "malayalam"
 print(palindrome(s))  # Output: True
 ```
 
+```python
+def palindrome(s):
+    n = len(s)
+    first = 0
+    last = n - 1
+
+    while first < last:
+        if s[first] != s[last]:
+            print("Not a palindrome")
+            return False
+        first += 1
+        last -= 1
+
+    print("Palindrome")
+    return True
+
+# Test
+palindrome("malayalam")
+```
+
 *While loop palindrome number*
 
 ```python
