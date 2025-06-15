@@ -100,8 +100,17 @@ for i in {1..5}; do
   echo "$i"
 done
 
-for file in $file; do
-  mv $file "${file%.txt}.log"
+for file in *.txt; do
+  mv "$file" "${file%.txt}.log"
+done
+
+*.txt matches all .txt files in the current directory.
+
+${file%.txt} strips the .txt extension from the filename.
+
+"${file%.txt}.log" adds .log instead.
+
+mv renames the file.
 
 
 data="value123"
