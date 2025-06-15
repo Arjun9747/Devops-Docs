@@ -253,6 +253,7 @@ echo "Logs older than 7 days have been backed up and deleted."
 -a time - access time 
 
 **Loop through each service and check its status**
+
 ```shell
 #!/bin/bash
 SERVICES=("nginx" "mysql" "redis")
