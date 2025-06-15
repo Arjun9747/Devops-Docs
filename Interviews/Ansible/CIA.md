@@ -301,7 +301,7 @@ ansible.builtin.users/files/lineinfile/service/template
 
 lock their password settings to ! 
 
----
+---yaml
 name:nginx install 
 host" webServers
 become: true 
