@@ -180,5 +180,165 @@ The assert module is used to verify that a certain condition is met. If the cond
 
 Use assert for checks and validations, and fail for hard stops with conditions, often combined with when
 
+Ansible 
+```markdonw
+Facts are used to collect information about target systems. 
+They are global 
+1.Sys Infor --> Os, CPU
+2. N/w ip addr
+3.HW information
+4. Package infor 
+
+Registers
+Variables that stores output of a task , specific to task 
+1. Command Output
+2.API response
+3.Script Output
+
+Notify tells handlers to trigger a task 
+Handlers are specific task that are run only when notified 
+
+SARIF --> Static Analysis Result Interchange Format 
+
+PAM --> Pluggable Authentication Modules 
+Use by System Admins to configure how authentication are handled for users and applications 
+
+Ansible Roles --> Standarized way to organize Ansible Code 
+locally in your playbook projects, 
+
+Ansible galaxy --> Repository for sharing and downloading roles or collections.
+On the internet 
+
+Molecule is a testing framework for ansible role. It helps you to develope, test and lint ansible role in a repeated and automated way.
+Create Docker container
+Apply the ansible role 
+Verify test the results
+tear down the instance 
+
+
+Jinja template 
+Jinja templates in Ansible let us write dynamic, customizable configuration files using variables, loops, and conditions.
+ This makes roles and playbooks much more flexible and reusable across different environments and hosts
+```
+ 
+ | Folder/File           | Purpose                                                                            |
+| --------------------- | ---------------------------------------------------------------------------------- |
+| `defaults/`           | Contains default variables (`main.yml`) that are the lowest precedence.            |
+| `vars/`               | Contains higher-precedence variables used specifically for this role.              |
+| `tasks/`              | Main task definitions go here (`main.yml`) — this is where the role’s logic lives. |
+| `handlers/`           | Contains handlers triggered by `notify`, typically used for restarting services.   |
+| `meta/`               | Includes role metadata (`main.yml`) like dependencies on other roles.              |
+| `templates/`          | Jinja2 templates used to render config files dynamically (e.g., `nginx.conf.j2`).  |
+| `README.md`           | Documentation about what the role does, variables to use, etc.                     |
+| `CHANGELOG.md`        | Tracks changes to the role across versions.                                        |
+| *(optional)* `files/` | If present, contains static files to be copied as-is.                              |
+
+```markdown
+This playbook applies OS-specific PAM hardening practices. It dynamically adjusts based on the OS type using ansible_facts.os_family.
+ It disables password caching via pam_ccreds, ensures password hash algorithms are secure with SHA-512 (NSA recommendation),
+ and applies specific templates and settings depending on the distribution. It uses Ansible constructs like package_facts,
+ lineinfile, template, and import_tasks to maintain clean, modular, and secure configurations."
+ 
+ 
+ This Ansible role configures hardened PAM settings for RedHat systems using templated files.
+ It installs sssd-client if LDAP/SSSD is enabled, then deploys a central configuration file
+ (rhel_auth.j2) to both system-auth-local and password-auth-local. These are then symlinked
+ to the main system files, allowing centralized control over password complexity (passwdqc)
+ and lockout policies (faillock). Using symlinks ensures the system uses our secure version without editing default-managed files directly.
+```
+ 
+ 
+ 
+ 
+ | Benefit                       | Description                                                                                      |
+| ----------------------------- | ------------------------------------------------------------------------------------------------ |
+| 🔒 **Security Hardening**     | Ensures no extra UID=0 users, locks system account passwords, and limits home folder access      |
+| 📜 **Compliance**             | Meets CIS, NIST, and NSA recommendations for password aging, shell locking, and user segregation |
+| 🔄 **Automation**             | Dynamically handles any number of users across systems without hardcoding                        |
+| 📦 **Idempotent & Auditable** | Safe to run repeatedly and can be integrated into CI pipelines or GitOps flows                   |
+
+
+```markdown
+"This playbook secures all cron directories and files by setting root ownership and removing group and other permissions.
+ This follows CIS benchmarks and protects against unauthorized access or tampering with scheduled jobs, which could otherwise
+ lead to privilege escalation or audit bypass."
+ 
+  This file removes and purges deprecated or insecure packages from the system,
+ but only if you’ve enabled this cleanup via the os_security_packages_clean variable.
+ The specific packages to remove are defined in the os_security_packages_list variable.
+ 
+ A core dump (or core file) is a snapshot of a program’s memory at the moment it crashes. It's mainly used for debugging.
+ This file is designed to control whether core dumps are allowed on the system, which is an important aspect of security hardening.
+ Disabling core dumps can prevent accidental leakage of sensitive information in crash dumps.
+ 
+ The /etc/login.defs file in Linux is a configuration file used by user account management tools like useradd, usermod, passwd, and login.
+ PASS_MAX_DAYS   90
+PASS_MIN_DAYS   7
+PASS_WARN_AGE   14
+
+UID_MIN         1000
+UID_MAX         60000
+
+CREATE_HOME     yes
+ENCRYPT_METHOD  SHA512
+
+LOGIN_RETRIES   5
+LOGIN_TIMEOUT   60
+
+In summary, this task ensures a hardened, consistent login.defs file is deployed as part of the system hardening process.
+```
+```yaml
+dev-sec.os-hardening 
+ansible-galaxy install dev-sec.os-hardening
+
+ansible.builtin.users/files/lineinfile/service/template 
+
+- name: Lock system accounts
+  user:
+    name: "{{ item }}"
+    password: "!"
+  loop: "{{ system_users }}"
+
+lock their password settings to ! 
+
+---
+name:nginx install 
+host" webServers
+become: true 
+gather-facts: true 
+
+vars: 
+	nginx-pakage_name: nginx 
+
+tasks:
+	- name: check if nginx is already installed 
+	ansible.builtin.package_facts:
+		manager: auto 
+		
+	- name: results 
+	ansible.builtin.debug:
+		msg: "NGXIN is not installed"
+	when: nginx package not installed
+	register: nginix_not_installed 
+	
+	- name: Install nginx
+	  ansible.builtin.package:
+		name: "{{nginx.package_name}}"
+		state: present
+		notify: start nginx
+		
+	- name: nginx 
+	ansible.builtin.debug:
+	name: "nginx not installed"
+	
+	-name: start NGINX
+	ansible.builtin.service
+	name: nginx
+	state: started
+	enabled: true
+```
+	
+ 
+
 
 
