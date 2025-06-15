@@ -253,5 +253,16 @@ These facts are gathered automatically by default using the setup module.
 | `ansible_memory_mb.real.total` | Total memory in MB   |
 
 
+**Workflow**
+
+```markdown
+Define Inventory (hosts)
+Create Playbooks / Roles
+Execution
+Task Execution
+
+ansible-playbook playbook.yml
+ansible-playbook -i inventory.ini playbook.yml
+ansible-playbook playbook.yml --check
 
 
