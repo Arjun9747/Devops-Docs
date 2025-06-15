@@ -120,3 +120,75 @@
 * **Kubelet**: Agent running on each node to ensure containers are running.
 * **Ambassador**: API Gateway for microservices in Kubernetes.
 * **Resource Quotas**: Limits the amount of resources a namespace can consume.
+
+**IRSA**
+```markdown
+ IAM Roles for Service Accounts
+ IRSA allows EKS pods to assume AWS IAM roles securely, without needing to hardcode AWS credentials
+
+You have a pod that needs to read from an S3 bucket. Instead of giving the entire EKS node IAM permissions (too broad), you use IRSA to assign a specific IAM role just to that pod's service account.
+
+set IAM trust polcies conditions --> for S3 access to pod
+
+For user
+
+Use k8s RBAC
+
+Create Role
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: my-namespace
+
+Create Role-binding
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dev-binding
+  namespace: my-namespace
+
+Kubernetes doesn't have a user database. Instead, EKS integrates with AWS IAM for authentication. But you must explicitly map IAM users or roles to Kubernetes users or groups using a config file called aws-auth.
+
+They authenticate using IAM credentials (via aws eks update-kubeconfig).
+IAM Authenticator verifies the IAM identity (user/role).
+The EKS cluster maps that IAM identity to a Kubernetes user or group (via aws-auth ConfigMap).
+Kubernetes checks RBAC rules to see what the user is allowed to do.
+
+map the user
+
+kubectl edit configmap aws-auth -n kube-system
+
+mapUsers: |
+  - userarn: arn:aws:iam::111122223333:user/dev-user
+    username: dev-user@example.com
+    groups:
+      - dev-group
+
+Create an RBAC Role for That Group
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: dev-role
+```
+
+```markdown
+
+Pod to S3
+
+✅ Create an IAM Role with S3 permissions and trust policy for the service account
+
+✅ Create a Kubernetes service account in the specific namespace
+
+✅ Deploy your pod using that service account
+
+✅ Your pod will now access S3 using AWS SDK (no secrets needed)
+
+```
+
+
+
+
+
