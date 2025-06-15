@@ -149,7 +149,8 @@ metadata:
   name: dev-binding
   namespace: my-namespace
 
-Kubernetes doesn't have a user database. Instead, EKS integrates with AWS IAM for authentication. But you must explicitly map IAM users or roles to Kubernetes users or groups using a config file called aws-auth.
+Kubernetes doesn't have a user database. Instead, EKS integrates with AWS IAM for authentication.
+But you must explicitly map IAM users or roles to Kubernetes users or groups using a config file called aws-auth.
 
 They authenticate using IAM credentials (via aws eks update-kubeconfig).
 IAM Authenticator verifies the IAM identity (user/role).
