@@ -126,4 +126,28 @@ key: Uniquely identifies the cache. If the hash of requirements.txt hasn’t cha
 restore-keys: Fallback keys if an exact match isn't found.
 ```
 
+```markdown
+We have self hosted runners where have used ubuntu image with customized softwares
+powershell, python, 
+
+For security perspective, we are putting data in our hosted runners 
+
+We have self-hosted and github hosted runners
+
+🔹 GitHub-Hosted Runners — for public tasks
+You use GitHub-hosted runners for:
+	• Linting, testing, formatting open-source tools/libraries
+	• Running low-risk or fast jobs (e.g., CI for frontend code)
+	• Tasks that don’t require access to internal infra
+
+
+🔹 Self-Hosted Runners — for secure/private tasks
+
+• Deployments to internal environments (dev/UAT/prod)
+• Running security tools (e.g., Prisma, Checkov) on private IaC
+• Jobs requiring VPN, VPC, secret vaults, or on-prem databases
+Custom tools or build environments not available on GitHub-hosted runners
+```
+
+
 
