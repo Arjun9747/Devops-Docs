@@ -337,6 +337,82 @@ tasks:
 	state: started
 	enabled: true
 ```
+
+```markdown
+serial controls how many hosts are processed at a time during a play. This is especially useful for:
+max_fail_percentage defines the maximum percent of failed hosts allowed before Ansible aborts the play.
+```
+```yaml
+- hosts: webservers
+  serial: 2
+  max_fail_percentage: 30
+  tasks:
+    - name: Run health check
+      command: /usr/bin/check_health
+```
+
+```markdown
+ignore_errors: yes--> Allows the playbook to continue execution even if the task fails.
+Customize failure conditions using expressions.
+rescue, always, and block --> try--catch-finally
+any_errors_fatal: true --> Fail the entire play immediately if any host fails.
+assert -->Used to enforce preconditions, like validating input or system state.
+Dry run --> ansible-playbook myplay.yml --check
+ custom facts allow you to collect and store additional information about your systems, beyond the standard facts collected by Ansible.
+Create a file in /etc/ansible/facts.d/ (or a custom directory) with a .fact extension, containing key-value pairs.
+key-Value pairs
+{
+  "datacenter": "DC1",
+  "environment": "production"
+}
+host.ini is the inventory file
+agentless and push model
+ansible-pull is a command-line tool that allows you to run Ansible playbooks on a node without requiring a central Ansible control node. Instead of pushing configurations from a control node, ansible-pull pulls the playbook from a repository (e.g., Git) and applies it locally.
+
+A lookup in Ansible is a way to retrieve data from external sources, such as files, databases, or APIs. Lookups can be used to:
+A callback in Ansible is a plugin that allows you to customize the output or behavior of Ansible.
+A filter in Ansible is a way to manipulate data, such as strings or lists.
+
+diff is a task parameter that allows you to display the differences between the current state and the desired state.
+Idempotency is a property of Ansible playbooks that ensures that running a playbook multiple times has the same effect as running it once.
+Check mode, also known as dry-run mode, allows you to run a playbook without making any changes to the system.
+changed_when is a task parameter that allows you to define when a task should be considered changed.
+
+linear --> one task at a time
+free --> The free strategy allows hosts to run tasks as fast as they can, without waiting for other hosts to complete the previous task.
+The host_pinned strategy-->  is similar to the linear strategy, but it executes tasks on each host in the order they are defined in the play, rather than executing the same task on all hosts.
+```
+
+```yaml
+- name: Check disk space
+  command: df -h /
+  register: disk_check
+  failed_when: "'100%' in disk_check.stdout"
+```
+
+```yaml
+- name: Ensure required variable is defined
+  assert:
+    that:
+      - my_required_var is defined
+      - my_required_var != ""
+    fail_msg: "my_required_var must be defined and non-empty"
+```
+
+**Loops**
+
+```yaml
+- name: Retry until service is up
+  uri:
+    url: http://localhost:8080
+    status_code: 200
+  register: result
+  retries: 5
+  delay: 10
+  until: result.status == 200
+```
+
+
 	
  
 
