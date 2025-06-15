@@ -200,9 +200,14 @@ Unlike dmesg (which only shows current kernel ring buffer), journalctl stores pe
 | `journalctl -k --since "1 hour ago"` | Kernel messages in the **last hour**    |
 | `journalctl -k -o short-monotonic`   | Show logs with **monotonic timestamps** |
 
+```markdown
+The characters #! are called a shebang (or hashbang).
+It's placed at the very first line of a script.
+It tells the Unix/Linux kernel which interpreter to use to execute the script that follows.
 
+/bin/bash → the absolute path to the Bash shell.
 
-
+```
 
 
 
