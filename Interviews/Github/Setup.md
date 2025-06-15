@@ -105,5 +105,25 @@ Codeql uses relational data and uses object query language
 Types
  . .ql querues
   - alert and path queries
+
+The cache feature in GitHub Actions is used to speed up workflows by reusing data from previous runs. This is particularly useful in CI/CD pipelines where you have dependencies or build artifacts that don’t change often.
+
 ```
+```yaml
+- name: Cache pip dependencies
+  uses: actions/cache@v4
+  with:
+    path: ~/.cache/pip
+    key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+    restore-keys: |
+      ${{ runner.os }}-pip-
+```
+```markdown
+path: Where pip stores downloaded packages.
+
+key: Uniquely identifies the cache. If the hash of requirements.txt hasn’t changed, the cache will be reused.
+
+restore-keys: Fallback keys if an exact match isn't found.
+```
+
 
