@@ -153,3 +153,130 @@ Misconfigured RBAC or default service accounts
 Know hardening tools: kube-bench, kubescape, kube-hunter, OPA, Kyverno
 
 Practice hardening CIS Benchmarks using tools like kube-bench.
+
+1. Disable Anonymous Access
+Ensure --anonymous-auth=false in the API server.
+
+Prevent unauthenticated access to cluster components.
+
+2. Use Role-Based Access Control (RBAC)
+Define Roles and ClusterRoles.
+
+Bind them only to the necessary Users or ServiceAccounts.
+
+Principle: Least Privilege
+
+3. Secure Service Accounts
+Don’t use default service accounts.
+
+Use automountServiceAccountToken: false when not needed.
+
+Rotate tokens periodically.
+
+4. Use Network Policies
+Define allowed ingress/egress per namespace or pod label.
+
+Restrict pod-to-pod communication by default.
+
+5. Pod Security Standards (PSS)
+Enforce one of:
+
+privileged
+
+baseline
+
+restricted
+
+Ensure pods don’t run as root or use host resources.
+
+6. Use Read-Only Root Filesystems
+Prevent modifications inside containers by setting readOnlyRootFilesystem: true.
+
+7. Restrict Host Access
+Avoid using hostPath, hostNetwork, hostPID, and hostIPC unless explicitly required.
+
+8. Resource Requests and Limits
+Set CPU/memory limits to avoid DoS attacks due to resource starvation.
+
+9. Use Liveness & Readiness Probes
+Helps detect and recover from broken applications.
+
+Also limits abuse via failing pods.
+
+10. Secure ETCD
+Use TLS for client/server communication.
+
+Enable authentication.
+
+Enable encryption at rest.
+
+🔐 Advanced Kubernetes Cluster Hardening Techniques
+These go beyond the basics and focus on runtime protection, admission control, compliance, and infrastructure hardening:
+
+11. Enable Audit Logs
+Set up audit-policy.yaml and enable it via API server flags.
+
+Forward logs to a SIEM system.
+
+12. Admission Controllers
+Enable useful ones like:
+
+NamespaceLifecycle
+
+PodSecurity
+
+NodeRestriction
+
+LimitRanger
+
+SecurityContextDeny (deprecated, replaced by PSS)
+
+13. Use Pod Security Admission (PSA)
+Kubernetes-native way to enforce PSS (baseline/restricted).
+
+Replace legacy PodSecurityPolicy (PSP).
+
+14. Use Policy Engines
+OPA/Gatekeeper or Kyverno for fine-grained custom policy enforcement:
+
+Disallow latest tags in images.
+
+Require labels on resources.
+
+Block privileged containers.
+
+15. Implement Runtime Security Tools
+Falco – Real-time syscall monitoring.
+
+AppArmor / SELinux / Seccomp – Kernel-level isolation.
+
+KubeArmor – LSM-based runtime enforcement.
+
+16. Upgrade Kubernetes Regularly
+Stay within the supported version skew.
+
+Regularly apply security patches to Kubernetes and container runtimes.
+
+17. Image and Supply Chain Security
+Sign images with cosign.
+
+Scan images using Trivy, Grype, or Aqua Microscanner.
+
+Enforce image provenance and registries.
+
+18. Encrypt Secrets at Rest
+Use KMS providers for key management.
+
+Encrypt Secrets and ConfigMaps using envelope encryption.
+
+19. Use Projected Volumes for Service Account Tokens
+Short-lived, audience-bound tokens reduce risk of token theft.
+
+20. Monitor & Harden Node Infrastructure
+Harden OS (CIS Benchmarks).
+
+Use tools like kube-bench, kube-hunter to test cluster security.
+
+Restrict SSH access, remove unnecessary packages.
+
+✅ Summary Table
