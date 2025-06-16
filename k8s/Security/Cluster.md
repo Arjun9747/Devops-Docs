@@ -88,8 +88,8 @@ metadata:
   name: restricted
 ```
 
-```rst
-# 1. **Privileged Profile**
+```markdown
+# 1. Privileged Profile
 
 The **Privileged** profile is the most permissive among the three Pod Security Standards (**Privileged**, **Baseline**, **Restricted**). It allows workloads to use powerful and potentially dangerous capabilities, which are typically restricted for security reasons.
 
@@ -128,23 +128,30 @@ The **Privileged** profile is the most permissive among the three Pod Security S
 These are legitimate scenarios where the privileged profile is necessary:
 
 ### 📦 Logging Agents
+
 Tools like Fluentd, Logstash, or Filebeat often need access to:
+
 - `/var/log`
-- `/var/lib/docker/containers`  
-Use `hostPath` to collect logs directly from host.
+- `/var/lib/docker/containers`
+
+Use `hostPath` to collect logs directly from the host.
 
 ### 📈 Monitoring DaemonSets
+
 Node exporters (e.g., Prometheus Node Exporter) or metrics collectors need:
+
 - Host network access  
 - Access to `/proc`, `/sys`  
 - May run as `privileged` to gather CPU, memory, kernel metrics
 
 ### 🛠️ System Management Tools
+
 Tools like `nsenter`, `iptables`, or eBPF tracers often run with elevated privileges.
 
 > “Only for critical system-level tools that require direct host interaction, and only in isolated namespaces with strict monitoring in place.”
 
 ```
+
 ```markdown
 # 2. **Baseline Profile – Kubernetes Pod Security Standard**
 
