@@ -1,3 +1,4 @@
+```markdown
 1. Authentication & Authorization
 Authentication: Who are you?
 → Users, Service Accounts, Certificates, OIDC.
@@ -280,3 +281,4 @@ Use tools like kube-bench, kube-hunter to test cluster security.
 Restrict SSH access, remove unnecessary packages.
 
 ✅ Summary Table
+```
