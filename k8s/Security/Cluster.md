@@ -88,6 +88,7 @@ metadata:
   name: restricted
 ```
 
+```markdown
 1. Privileged Profile
 Allows:
 
@@ -143,9 +144,6 @@ Goal: Strong isolation, secure-by-default
 🔹 4. Namespace-Based Enforcement
 You can apply Pod Security Standards per namespace using Kubernetes labels:
 
-bash
-Copy
-Edit
 kubectl label namespace dev \
   pod-security.kubernetes.io/enforce=baseline \
   pod-security.kubernetes.io/audit=restricted \
@@ -206,6 +204,8 @@ Level	Restricts	Allows Root	Allows Privileged	Use Case
 Privileged	Nothing	Yes	Yes	Trusted system pods
 Baseline	hostPath, escalations	Yes	No	General workloads
 Restricted	Most risky features	No	No	Secure environments (prod)
+
+```
 
 
 
