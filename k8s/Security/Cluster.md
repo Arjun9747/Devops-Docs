@@ -52,7 +52,7 @@ During upgrades, you don’t update everything at once. So Kubernetes must allow
 | Control Plane | Components must be **same version**                      |
 | `kubectl`     | Up to **1 minor version** older or newer than API server |
 
-```makrdown
+```markdown
 5. Cluster Upgrades
 Use kubeadm for controlled upgrades.
 
@@ -89,7 +89,7 @@ metadata:
 ```
 
 ```rst
-1. Privileged Profile
+**1. Privileged Profile**
 The Privileged profile is the most permissive among the three Pod Security Standards (Privileged, Baseline, Restricted). It allows workloads to use powerful and potentially dangerous capabilities, which are typically restricted for security reasons.
 
 ✅ What It Allows
