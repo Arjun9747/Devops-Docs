@@ -36,11 +36,23 @@ Rotate service account tokens.
 
 Use Projected Service Account Tokens for secure and short-lived tokens (enhanced in v1.21+).
 
-4. Version Skew Policy
+```
+**Version Skew Policy**
+
 Ensures compatibility between kubelet, kubeadm, and control plane.
 
 Important during upgrades: kubelet must not lag behind API server by more than 1 minor version.
 
+During upgrades, you don’t update everything at once. So Kubernetes must allow different versions of components to coexist temporarily.
+
+| Component     | Version Skew Allowed                                     |
+| ------------- | -------------------------------------------------------- |
+| `kubelet`     | Up to **1 minor version behind** API server              |
+| `kubeadm`     | Must be **same version as control plane**                |
+| Control Plane | Components must be **same version**                      |
+| `kubectl`     | Up to **1 minor version** older or newer than API server |
+
+```makrdown
 5. Cluster Upgrades
 Use kubeadm for controlled upgrades.
 
@@ -60,22 +72,143 @@ Supports:
 Combining multiple sources.
 
 Setting expiration and audience for tokens.
+```
+**Pod Security Standards (PSS)**
 
-🔒 What’s Missing? (Advanced & Real-World Hardening)
-7. Pod Security Standards (PSS)
 Successor to PodSecurityPolicy (deprecated).
 
 Enforce baseline or restricted pod security modes.
 
 Use PodSecurity admission controller.
 
-yaml
-Copy
-Edit
+```yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
   name: restricted
+```
+
+1. Privileged Profile
+Allows:
+
+hostPath, hostNetwork, hostPID
+
+Running as root
+
+Privileged containers
+
+Example Use Cases:
+
+Logging agents
+
+Monitoring DaemonSets
+
+2. Baseline Profile
+Prevents known privilege escalations.
+
+Disallows:
+
+hostPath
+
+hostPID / hostIPC
+
+Privileged containers
+
+capabilities: ALL
+
+Allows:
+
+Running as root (but no escalation)
+
+Some volume types
+
+Goal: Accept most apps with minor changes
+
+3. Restricted Profile
+Enforces strict security policies.
+
+Requires:
+
+runAsNonRoot: true
+
+readOnlyRootFilesystem: true
+
+seccompProfile, AppArmor, SELinux
+
+Explicit capabilities (dropping defaults)
+
+Goal: Strong isolation, secure-by-default
+
+🔐 Advanced PSS Practices
+🔹 4. Namespace-Based Enforcement
+You can apply Pod Security Standards per namespace using Kubernetes labels:
+
+bash
+Copy
+Edit
+kubectl label namespace dev \
+  pod-security.kubernetes.io/enforce=baseline \
+  pod-security.kubernetes.io/audit=restricted \
+  pod-security.kubernetes.io/warn=restricted
+enforce: Blocks non-compliant pods.
+
+audit: Logs violations (no block).
+
+warn: Shows warning in kubectl.
+
+🔹 5. Enforcement Modes
+You can define separate levels for:
+
+enforce: Actual enforcement
+
+audit: Log-only mode
+
+warn: CLI warning
+
+This helps in gradual adoption of stricter policies.
+
+🔹 6. Using Custom Policy Engines
+While PSS is good for standard hardening, OPA/Gatekeeper or Kyverno allow:
+
+Custom policies (e.g., enforce image tags, labels)
+
+Multi-tenant enforcement
+
+JSON/YAML schema validation
+
+🔹 7. Monitoring with Audit Logs
+Use audit level to test impact before enforcing.
+
+Integrate logs with SIEM tools.
+
+🔹 8. Hardening Beyond PSS
+PSS covers pod specs, not everything. Additional layers include:
+
+Network Policies
+
+Runtime protection (e.g., Falco)
+
+Admission controllers (ValidatingWebhook, OPA)
+
+🧠 Interview Tip
+Expect questions like:
+
+What's the difference between Baseline and Restricted?
+
+How do you enforce PSS in production?
+
+How do you apply PSS gradually to legacy workloads?
+
+Can you customize PSS? (→ No, for customization use OPA/Kyverno)
+
+✅ Summary Table
+Level	Restricts	Allows Root	Allows Privileged	Use Case
+Privileged	Nothing	Yes	Yes	Trusted system pods
+Baseline	hostPath, escalations	Yes	No	General workloads
+Restricted	Most risky features	No	No	Secure environments (prod)
+
+
+
 8. Network Policies
 Restrict pod-to-pod and pod-to-service communication.
 
