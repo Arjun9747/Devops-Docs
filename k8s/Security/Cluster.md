@@ -145,42 +145,152 @@ Tools like `nsenter`, `iptables`, or eBPF tracers often run with elevated privil
 > “Only for critical system-level tools that require direct host interaction, and only in isolated namespaces with strict monitoring in place.”
 
 ```
+```markdown
+# 2. **Baseline Profile – Kubernetes Pod Security Standard**
 
-2. Baseline Profile
-Prevents known privilege escalations.
+The **Baseline** profile is a **middle ground** in Kubernetes Pod Security Standards. It strikes a **balance between usability and security**, blocking known privilege escalations while **allowing common containerized workloads** to run without needing special permissions.
 
-Disallows:
+> It’s more restrictive than the **Privileged** profile, but less strict than **Restricted**.
 
-hostPath
+---
 
-hostPID / hostIPC
+## ✅ What It Allows
 
-Privileged containers
+- **Running as non-root or root**  
+  - Pods *can* run as root user (`runAsUser: 0`)  
+  - Must **not escalate privileges** (`allowPrivilegeEscalation: false`)
 
-capabilities: ALL
+- **Capabilities**  
+  - Only a limited set of Linux capabilities are allowed  
+  - Dangerous capabilities like `CAP_SYS_ADMIN` are blocked
 
-Allows:
+- **Volume Types**  
+  - Allows safer volume types:
+    - `emptyDir`, `configMap`, `secret`, `downwardAPI`, `projected`
+  - Disallows risky types like `hostPath` and some `csi` drivers with host mounts
 
-Running as root (but no escalation)
+- **Seccomp**  
+  - `seccomp` profiles are *not required*, but encouraged
 
-Some volume types
+- **SELinux & AppArmor**  
+  - Can be used but not enforced
 
-Goal: Accept most apps with minor changes
+- **hostNetwork / hostPID / hostIPC**  
+  - ❌ Not allowed
 
-3. Restricted Profile
-Enforces strict security policies.
+- **Privileged Containers**  
+  - ❌ Not allowed (`privileged: true` is denied)
 
-Requires:
+- **Host Ports**  
+  - ✅ Allowed, but should be used carefully
 
-runAsNonRoot: true
+---
 
-readOnlyRootFilesystem: true
+## ❌ What It Denies
 
-seccompProfile, AppArmor, SELinux
+| Feature                          | Denied? | Reason                                           |
+|----------------------------------|---------|--------------------------------------------------|
+| `privileged: true`              | ✅      | Too much access to host kernel                   |
+| `hostPath` volumes              | ✅      | Direct host access risks                         |
+| `hostNetwork`, `hostPID`        | ✅      | Breaks pod isolation                             |
+| `allowPrivilegeEscalation: true`| ✅      | Enables container to gain more privileges        |
+| Unsafe capabilities (`CAP_SYS_ADMIN`) | ✅ | High-risk system-level operations               |
 
-Explicit capabilities (dropping defaults)
+---
 
-Goal: Strong isolation, secure-by-default
+## 🧪 Example Use Cases
+
+The Baseline profile supports typical cloud-native workloads that don’t need deep host access:
+
+### ✅ **Web Applications**
+- Frontend and backend containers
+- APIs and microservices
+- Use configMaps, secrets, env variables
+
+### ✅ **CI/CD Runners (Non-Privileged)**
+- GitLab runners, Jenkins agents
+- Workloads without host access
+
+### ✅ **Stateless Services**
+- Services that run in user space
+- Don’t interact with host filesystems or processes
+
+---
+
+## 💡 Summary Table
+
+| Feature                      | Privileged | Baseline | Restricted |
+|-----------------------------|------------|----------|------------|
+| Privileged containers       | ✅         | ❌       | ❌         |
+| hostPath volumes            | ✅         | ❌       | ❌         |
+| hostNetwork/hostPID         | ✅         | ❌       | ❌         |
+| Run as root                 | ✅         | ✅       | ❌ (default) |
+| allowPrivilegeEscalation    | ✅         | ❌       | ❌         |
+
+> **Baseline** is ideal for **general-purpose workloads** that **don’t need full host access** but still require **some flexibility**.
+
+
+# 3. **Restricted Profile – Kubernetes Pod Security Standard**
+
+The **Restricted** profile is the most secure and strict of the three Pod Security Standards in Kubernetes:
+**Privileged → Baseline → Restricted**.
+
+It enforces best practices for hardening container workloads and ensures **strong isolation** — suitable for production, regulated, and multi-tenant environments.
+
+---
+
+## ✅ What It Allows
+
+- **Running as Non-Root Only**
+  - Must set `runAsNonRoot: true`
+  - UID 0 (root) is not allowed
+
+- **Minimal Linux Capabilities**
+  - Only default safe capabilities are permitted
+  - Dangerous ones like `CAP_SYS_ADMIN`, `CAP_NET_ADMIN` are blocked
+
+- **Volume Types**
+  - Allows: `emptyDir`, `configMap`, `secret`, `downwardAPI`, `projected`
+  - ❌ Blocks: `hostPath`, `nfs`, and other unsafe volume types
+
+- **Networking**
+  - ❌ `hostNetwork`, `hostPID`, `hostIPC` are not allowed
+  - ❌ `hostPorts` are also disallowed by default
+
+- **Privilege Escalation**
+  - `allowPrivilegeEscalation: false` is enforced
+
+- **Privileged Containers**
+  - ❌ Not allowed (`privileged: true` is denied)
+
+- **Security Features**
+  - Requires:
+    - **seccomp** profile (e.g., `RuntimeDefault`)
+    - **readOnlyRootFilesystem: true`**
+    - Enforces valid **AppArmor** or **SELinux** profiles (if supported)
+
+---
+
+## ❌ What It Denies
+
+| Feature                          | Denied? | Reason                                       |
+|----------------------------------|---------|----------------------------------------------|
+| `privileged: true`              | ✅      | Prevents full access to host kernel          |
+| Running as root (`UID 0`)       | ✅      | Enforces strict least-privilege              |
+| `hostPath` volumes              | ✅      | Blocks access to host filesystem             |
+| `hostNetwork`, `hostPID`        | ✅      | Prevents namespace and process sharing       |
+| `hostPorts`                     | ✅      | Avoids exposing host networking              |
+| `allowPrivilegeEscalation: true`| ✅      | Disallows gaining more permissions           |
+
+---
+```
+## 🧪 Example Use Cases
+
+Restricted profile is best for **security-first workloads** where **host isolation and container hardening** are critical.
+
+### ✅ **Internal Microservices**
+- Stateless services with zero host dependencies
+- Properly sandboxed with n
 
 🔐 Advanced PSS Practices
 🔹 4. Namespace-Based Enforcement
