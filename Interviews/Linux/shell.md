@@ -328,6 +328,43 @@ done
 | `-P`             | Use **Perl-compatible regular expressions** (enables `\K`, lookaheads, etc.)                                                                                                |
 | `'status=\K\S+'` | Match a pattern where:<br> - `status=` is the prefix<br> - `\K` tells `grep` to **"forget"** everything before it<br> - `\S+` matches one or more non-whitespace characters |
 
+**Infinite loop**
+
+```shell
+while true; do
+  echo "Running infinitely..."
+  sleep 1
+done
+
+*********************
+while :; do
+  echo "This will never stop"
+  sleep 1
+done
+********************
+
+for (( ; ; )); do
+  echo "Looping forever"
+  sleep 1
+done
+```
+🛑 To stop the loop:
+Press Ctrl + C in the terminal
+
+Or use kill if running in background
+
+```markdown
+
+$0 ; $1 to $9 ; $@	; $$   --> special varaibles
+
+Take input from user 
+
+read -p "Enter your age: " age
+echo "You are $age years old."
+```
+
+
+
 
 
 
