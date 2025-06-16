@@ -88,7 +88,7 @@ metadata:
   name: restricted
 ```
 
-```markdown
+```rst
 1. Privileged Profile
 The Privileged profile is the most permissive among the three Pod Security Standards (Privileged, Baseline, Restricted). It allows workloads to use powerful and potentially dangerous capabilities, which are typically restricted for security reasons.
 
