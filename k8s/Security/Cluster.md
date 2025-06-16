@@ -1,10 +1,10 @@
 ```markdown
-1. Authentication & Authorization
-Authentication: Who are you?
-→ Users, Service Accounts, Certificates, OIDC.
+**1. Authentication & Authorization**
+  Authentication: Who are you?
+    → Users, Service Accounts, Certificates, OIDC.
 
-Authorization: What can you do?
-→ Enforced via RBAC (Role-Based Access Control).
+    Authorization: What can you do?
+  → Enforced via RBAC (Role-Based Access Control).
 
 Best Practices:
 
@@ -12,29 +12,29 @@ Use OIDC with identity providers.
 
 Rotate certificates/tokens periodically.
 
-2. RBAC (Role-Based Access Control)
-Role and RoleBinding: Namespaced permissions.
+**2. RBAC (Role-Based Access Control)**
+    Role and RoleBinding: Namespaced permissions.
 
-ClusterRole and ClusterRoleBinding: Cluster-wide.
+    ClusterRole and ClusterRoleBinding: Cluster-wide.
 
-Creating Tokens: Manual token creation for service accounts (used in CI/CD or external integrations).
+    Creating Tokens: Manual token creation for service accounts (used in CI/CD or external integrations).
 
-Least Privilege Principle: Only grant what's necessary.
+    Least Privilege Principle: Only grant what's necessary.
 
-3. Service Accounts
-Default account exists per namespace.
+**3. Service Accounts**
+      Default account exists per namespace.
 
-Attach service accounts explicitly to pods.
+      Attach service accounts explicitly to pods.
 
-Best Practices:
+      Best Practices:
 
-Avoid using the default service account.
+      Avoid using the default service account.
 
-Use automountServiceAccountToken: false if not needed.
+      Use automountServiceAccountToken: false if not needed.
 
-Rotate service account tokens.
+      Rotate service account tokens.
 
-Use Projected Service Account Tokens for secure and short-lived tokens (enhanced in v1.21+).
+      Use Projected Service Account Tokens for secure and short-lived tokens (enhanced in v1.21+).
 
 ```
 **Version Skew Policy**
@@ -53,7 +53,7 @@ During upgrades, you don’t update everything at once. So Kubernetes must allow
 | `kubectl`     | Up to **1 minor version** older or newer than API server |
 
 ```markdown
-5. Cluster Upgrades
+**5. Cluster Upgrades**
 Use kubeadm for controlled upgrades.
 
 Upgrade order:
@@ -64,7 +64,7 @@ kubelet & kube-proxy on workers
 
 Verify compatibility using kubeadm upgrade plan.
 
-6. Projected Volumes
+**6. Projected Volumes**
 Mechanism to inject secrets, configMaps, service account tokens into pods.
 
 Supports:
