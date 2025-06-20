@@ -193,3 +193,35 @@ Harder to detect missing metrics (if push fails).
 
 Risk of data duplication or loss if not handled properly.
 ```
+
+```markdown
+If users report slowness but logs show no errors and CPU is healthy, I follow a layered troubleshooting approach.
+First, I check latency metrics and request durations in Prometheus or APM tools to confirm the issue.
+I look for signs like slow DB queries, thread pool bottlenecks, or network latency.
+If tracing is enabled, I trace a slow request end-to-end to identify which service or component is delaying.
+I also check for external API latency, DNS resolution time, or recent deployments.
+This helps me narrow down and isolate the root cause quickly.
+```
+
+```markdown
+In our Kubernetes setup, we use distributed tracing with OpenTelemetry to trace requests across microservices.
+Each service is instrumented to generate and propagate trace IDs using the traceparent header.
+These spans are collected by the OpenTelemetry Collector, deployed as a sidecar or DaemonSet, and forwarded to Jaeger for visualization.
+This allows us to trace a user request end-to-end — for example, from the ingress gateway → auth service → payment → database — and identify where latency or errors occur.
+```
+
+```markdown
+I’d start by identifying the pod crash reason with kubectl describe pod and confirming it's OOMKilled.
+Then, I’d check the memory limits set for the container, and use kubectl top or Prometheus to review actual memory usage.
+If memory usage regularly exceeds the limit, I’d adjust the container's memory limits and requests.
+If there’s a memory leak or inefficient code, I’d review logs, profile memory, and tune the application.
+To prevent future issues, I’d add alerts and consider using VPA to automatically adjust memory based on usage patterns.
+```
+
+```markdown
+I treat every false alarm as a signal to improve our alerting system.
+When woken up unnecessarily, I first classify the alert and check if it was noisy due to poor thresholds or lack of context.
+I then tune the alert with better duration, use percentiles, or suppress it during low-impact times.
+I also reclassify alerts so that only actionable, high-priority issues page on-call, while lower-priority ones go to Slack or dashboards.
+Lastly, I ensure we do a quick retro so we keep improving and reduce alert fatigue over time.
+```
