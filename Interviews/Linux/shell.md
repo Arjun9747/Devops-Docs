@@ -361,6 +361,11 @@ Take input from user
 
 read -p "Enter your age: " age
 echo "You are $age years old."
+
+find /var/log -type f -mtime +30 -exec rm -f {} \;
+
+Find and remove the log files older than 30 days in a folder.
+
 ```
 
 
