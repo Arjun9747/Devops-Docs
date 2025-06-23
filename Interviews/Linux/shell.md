@@ -411,6 +411,28 @@ echo "username password created"
 fi
 done
 ```
+delete file size more than 100 mb 
+#-exec rm -v {} \;	Delete each file and show filename
+
+```bash
+find /path/to/search -type f -size +100M -exec rm -v {} \;
+```
+
+current date user logged in 
+```bash
+last -F | grep "$(date '+%b %e')" | awk '{print $1}' | sort | uniq
+```
+
+delete first and last line 
+```bash
+sed '1d; $d' filename.txt
+```
+| Expression | Meaning                   |
+| ---------- | ------------------------- |
+| `1d`       | Delete the **first line** |
+| `$d`       | Delete the **last line**  |
+
+
 
 
 
