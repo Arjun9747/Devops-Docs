@@ -379,6 +379,41 @@ echo " ---$(date '+Y-%m-%d -%H:%M:%S) starting log cleanup-----" >> "$SCRIPT_LOG
 find $LOG_DIR -type f -name "*gz" -mtime +30 -exec rm -v {}\; >>SCRIPT_LOG 2>&1
 ```
 
+Here's a secure and functional shell script to read a CSV file and create users on a Linux system with the following requirements:
+
+```csv
+username,password
+alice,Password@123
+bob,Secret@456
+```
+
+```shell
+#!bin/bash
+
+CSV_FILE="users.csv"
+
+if [[EUID -ne 0]]; then
+    echo "the script must run as root"
+    exit 1
+
+#skip the lines
+tail -n +2 "$CSV_FILE" | while IFS=',' read -r username password; do
+    if id "$username" &>/dev/null; then
+        echo "username already exist"
+    else
+        useradd "$username"
+        echo "$username:password" |chpasswd
+#chpasswd is a command to update passwords in batch mode.
+
+# Force password change on first login
+chage -d 0 "$username"
+echo "username password created"
+fi
+done
+```
+
+
+
 
 
 
