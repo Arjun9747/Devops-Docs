@@ -367,6 +367,19 @@ find /var/log -type f -mtime +30 -exec rm -f {} \;
 Find and remove the log files older than 30 days in a folder.
 
 ```
+Write a shell script that compresses logs older than 7 days and deletes logs older than 30 days. Also, run it daily via cron.
+```bash
+#!bin/bash
+LOG_DIR = "/var/log"
+SCRIPT_LOG = "/var/log/log_cleanup_Script.log"
+
+echo " ---$(date '+Y-%m-%d -%H:%M:%S) starting log cleanup-----" >> "$SCRIPT_LOG"
+
+#compress
+find $LOG_DIR -type f -name "*gz" -mtime +30 -exec rm -v {}\; >>SCRIPT_LOG 2>&1
+```
+
+
 
 
 
