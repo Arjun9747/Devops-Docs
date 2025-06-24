@@ -93,7 +93,56 @@ Yes, you can create composite alarms in CloudWatch. These alarms evaluate the st
 | Combining infrastructure + app signals | Trigger alarm if **CPU is high AND API is slow**                             |
 | Suppress flapping alerts               | Alert only on **sustained multiple alarm states**                            |
 
+A metric filter analyzes log data in near real-time and creates a CloudWatch metric from specific patterns found in the logs.
+
+“We had noisy alerts every Monday morning due to predictable CPU spikes when batch jobs ran. By switching to anomaly detection, CloudWatch learned this pattern and only alerted us when something abnormal happened — like jobs running longer than usual.”
+
 ```
+
+**Cloud Trail Management and Data Events**
+
+```markdown
+🔹 Management Events (Control Plane)
+“These capture control plane operations — in other words, who is managing or configuring AWS resources. This includes actions like creating an EC2 instance, modifying IAM policies, or deleting an S3 bucket.
+These are enabled by default in CloudTrail and are usually lower in volume.”
+
+Examples:
+RunInstances (launch EC2)
+CreateUser, AttachPolicy
+CreateBucket, UpdateFunctionConfiguration
+
+🔹 Data Events (Data Plane)
+“These log interactions with the content or data stored in services like S3, Lambda, or DynamoDB.
+They are more granular and high-volume, which is why they’re not enabled by default and have a separate cost.”
+
+Examples:
+GetObject, PutObject on S3
+Invoke a Lambda function
+GetItem on DynamoDB (via CloudTrail Lake)
+
+“This distinction helps balance audit completeness vs cost. Management events give a high-level view of system changes, while Data Events are used for forensics, compliance audits, and detecting unauthorized data access.”
+
+To secure CloudTrail logs, I encrypt them with KMS, restrict access using fine-grained S3 bucket policies, and enable integrity validation to detect tampering. I also centralize logs in a secure audit account and monitor for unauthorized access or configuration changes — all of which are key for forensic readiness and compliance
+
+“To ensure CloudTrail logs are immutable, I enable S3 Object Lock in compliance mode, restrict all PutObject and DeleteObject permissions with bucket policies, and use CloudTrail’s log file integrity validation. I also centralize logs in a dedicated log archive account and monitor for any changes to CloudTrail or its destination bucket to ensure full audit integrity.”
+
+Yes, CloudTrail is a critical tool for auditing AWS activity, but it does have some limitations and potential logging gaps.
+
+🔹 First, CloudTrail is not real-time — there's typically a 5–15 minute delay for management events and longer for data events. So I don't rely on it for immediate threat detection.
+
+🔹 Second, it only captures control plane activity by default. If I want to monitor data-level access (like S3 GetObject), I must explicitly enable data events, which can increase costs.
+
+🔹 Third, unless I enable multi-region trails or use an organization-wide trail, I might miss events from other regions or accounts.
+
+To address this, I always:
+Enable multi-region and org-wide trails
+Enable data events for critical S3 buckets and Lambda functions
+Use EventBridge rules to detect critical activity like DeleteTrail or ConsoleLogin failures
+Forward CloudTrail logs to CloudWatch Logs or a SIEM for faster processing and alerting
+Monitor delivery health and integrity using digest files and log validation
+
+```
+
 
 
 
