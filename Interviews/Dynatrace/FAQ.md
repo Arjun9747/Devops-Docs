@@ -33,3 +33,27 @@ Traces – End-to-end journey of a request
 
 Tools: OpenTelemetry, Grafana Tempo, Jaeger, Honeycomb, Lightstep, Datadog APM, Dynatrace (observability platforms).
 ```
+
+**how to emit custom logs and metrics in your application ?**
+
+```markdown
+"In my recent application deployments, especially microservices running in containers on AWS, I implemented both custom logging and metrics to improve observability and debugging efficiency.
+
+For logging, I used structured JSON logs with the standard logging module in Python. I ensured logs included contextual fields like timestamp, log level, service name, and correlation ID for traceability. These logs were emitted to stdout, captured by Fluent Bit, and sent to ELK (or CloudWatch Logs in AWS setups).
+
+For custom metrics, I used the prometheus_client library in Python. I exposed an endpoint (/metrics) where we published custom metrics like:
+
+request_count (Counter)
+
+cpu_load (Gauge)
+
+request_latency_seconds (Histogram)
+
+This allowed Prometheus to scrape data regularly, and we visualized it using Grafana dashboards.**
+
+The benefit was twofold:
+
+We reduced MTTR during incidents because logs were searchable and metrics showed patterns over time.
+
+Developers could proactively monitor new features with real-time metrics, improving feedback loops.**
+```
