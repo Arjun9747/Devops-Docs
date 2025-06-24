@@ -156,3 +156,10 @@ Check Network/Load Balancer --> check packet drops
 
 check client side--> CDN performance
 ```
+
+**Trace request for multiple microservices**
+
+```markdown
+“To trace a request across multiple microservices in Kubernetes, I implement distributed tracing using standards like OpenTelemetry or tools like Dynatrace, Jaeger, or Datadog APM. Each microservice propagates a unique trace ID through HTTP headers (e.g., traceparent, x-b3-traceid). This allows us to follow the request from the frontend to backend, through service-to-service hops, and view the entire flow as a trace. We instrument the application code and collect telemetry using sidecars, agents, or SDKs, then visualize it in a tracing backend.”
+```
+
