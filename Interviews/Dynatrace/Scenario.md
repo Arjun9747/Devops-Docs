@@ -15,9 +15,7 @@ You can inform Dynatrace about new deployments so that it can correlate anomalie
 Use the Dynatrace API to tag entities during deployment or test runs (e.g., to indicate load test or staging environment).
 
 🔧 Python Script Example:
-python
-Copy
-Edit
+```python
 import requests
 
 api_token = "<YOUR_DYNATRACE_API_TOKEN>"
@@ -41,12 +39,13 @@ response = requests.post(
 
 print("Tag applied:", response.status_code)
 ✅ Now you can filter or suppress alerts from entities tagged IgnoreAlerts.
+```
 
 
 ⚙️ 3. Use Dynatrace Maintenance Windows (via GitHub Actions or Python)
 If you're doing deployments or tests, create maintenance windows to suppress alerts temporarily.
 
-
+```python
 import requests
 from datetime import datetime, timedelta
 
@@ -82,3 +81,4 @@ response = requests.post(
 )
 
 print("Maintenance window created:", response.status_code)
+```
