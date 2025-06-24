@@ -116,3 +116,29 @@ Performance degradation post-deployment (automatically flagged by Dynatrace)
 
 We integrate Dynatrace with GitHub Actions and ArgoCD to tag new releases and correlate performance issues with deployments.
 ```
+
+**Logs Metrics and traces**
+
+```markdown
+🧱 1. Logs – What happened
+Definition: Time-stamped, human-readable or structured records of events that happened in the system.
+
+Used For: Debugging, auditing, investigating errors.
+✅ Great for deep debugging and context
+❌ Not ideal for real-time trend analysis
+
+📈 2. Metrics – What is happening (quantitatively)
+Definition: Numeric values representing the behavior or health of your system over time.
+Used For: Alerting, dashboards, trend analysis, performance monitoring.
+
+✅ Efficient, cheap to store, great for alerting
+❌ Lacks rich context for root cause
+
+🔍 3. Traces – Why and where it happened
+Definition: A trace is the journey of a single request as it flows through various services/components in a distributed system.
+
+Used For: Performance profiling, latency analysis, identifying bottlenecks.
+
+✅ Excellent for debugging microservices and distributed systems
+❌ More complex and heavier to instrument
+```
