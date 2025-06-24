@@ -142,3 +142,17 @@ Used For: Performance profiling, latency analysis, identifying bottlenecks.
 ✅ Excellent for debugging microservices and distributed systems
 ❌ More complex and heavier to instrument
 ```
+
+**slowness in app but no logs**
+
+```markdown
+✅ Step 1: Verify and Scope the Slowness --> Region /AZ specific or any recent deployments
+
+✅ Step 2: Check Application-Level Latency --> high response time/ increase queue
+
+✅ Step 3: Check Downstream Dependencies --> check DB queries, API retires
+
+Check Network/Load Balancer --> check packet drops
+
+check client side--> CDN performance
+```
