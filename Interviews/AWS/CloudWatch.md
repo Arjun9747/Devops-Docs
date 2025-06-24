@@ -64,6 +64,37 @@ You’re tracking short-lived spikes (e.g., bursty traffic)
 ```
 ********************************************************************************************************************
 
+**Alarms**
+
+```markdown
+A CloudWatch Alarm is a monitoring feature in AWS CloudWatch that watches a single metric (or math expression of metrics) and performs actions based on thresholds you define. It continuously evaluates metric values and changes state when they cross thresholds, allowing for alerting, automation, or scaling actions
+
+📌 Alarm States
+OK – Metric is within defined limits
+ALARM – Metric has crossed the threshold (e.g., high CPU, low free memory)
+INSUFFICIENT_DATA – Not enough data to evaluate the threshold
+
+✅ Follow-up 1: What happens when an alarm transitions from OK to ALARM?
+Answer:
+When the alarm transitions from OK to ALARM, CloudWatch:
+Executes any configured actions:
+Sends an SNS notification
+Triggers a Lambda function or Auto Scaling policy
+Logs the state change in CloudWatch Events
+(Optional) Creates an entry in AWS Health Dashboard or incident tracking tools (via integration)
+✅ Best practice: always test the action with simulated state changes.
+
+Yes, you can create composite alarms in CloudWatch. These alarms evaluate the state of multiple other alarms using logical expressions (AND, OR, NOT) instead of watching a single metric.
+
+| Scenario                               | Why Composite Alarm Helps                                                    |
+| -------------------------------------- | ---------------------------------------------------------------------------- |
+| Avoiding noise                         | Only alert when **multiple metrics fail** (e.g., latency **AND** error rate) |
+| Creating critical alerts               | Alert only when **all regional alarms** are in `ALARM`                       |
+| Combining infrastructure + app signals | Trigger alarm if **CPU is high AND API is slow**                             |
+| Suppress flapping alerts               | Alert only on **sustained multiple alarm states**                            |
+
+```
+
 
 
 
