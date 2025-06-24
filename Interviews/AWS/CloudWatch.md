@@ -43,7 +43,25 @@ CloudWatch Alarms (monitor thresholds and trigger notifications or actions)
 | **Sources**     | AWS services, custom apps               | CloudWatch Agent, Lambda, VPC Flow Logs      | AWS service actions or scheduled events         |
 
 
+**Custom Metric**
 
+```markdown
+To set up a custom metric in Amazon CloudWatch, you publish your own numeric data points (e.g., queue size, request count, cache hits) using the PutMetricData API. This allows you to monitor application-specific or business-level KPIs not captured by AWS by default.
+
+| Type                 | Granularity | Use Case                                  | Cost        |
+| -------------------- | ----------- | ----------------------------------------- | ----------- |
+| **Standard Metrics** | 1-minute    | General monitoring, dashboards, alarms    | Lower cost  |
+| **High-Resolution**  | 1-second    | Real-time monitoring, low-latency systems | Higher cost |
+
+🧠 When to Use High-Resolution Metrics:
+Use high-resolution (1s) if:
+
+You're monitoring real-time systems (e.g., gaming, trading)
+
+You want fast alarm reaction times (e.g., failover, autoscaling)
+
+You’re tracking short-lived spikes (e.g., bursty traffic)
+****************************************************************8
 
 
 
