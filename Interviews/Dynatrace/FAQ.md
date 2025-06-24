@@ -57,3 +57,62 @@ We reduced MTTR during incidents because logs were searchable and metrics showed
 
 Developers could proactively monitor new features with real-time metrics, improving feedback loops.**
 ```
+
+**Kind of metrics to scrape**
+
+```markdown
+"In my current organization, we use Dynatrace extensively for full-stack observability, and we collect a combination of infrastructure, application, and business-level metrics. Here's how it's structured:"
+
+🔹 1. Infrastructure Metrics (via OneAgent or extensions)
+CPU, Memory, Disk I/O, Network Usage per host and per container
+
+Process-level metrics, like JVM heap size, garbage collection time
+
+Kubernetes-specific metrics, like:
+
+Pod restarts
+
+Container CPU/Memory limits vs usage
+
+Node pressure (memory/cpu)
+
+Cluster health score
+
+We use Dynatrace’s Kubernetes integration to get per-pod and per-node observability.
+
+🔹 2. Application Metrics
+Request count, failure rate, response time — automatically detected through Dynatrace’s Smartscape and PurePath.
+
+Custom service metrics:
+
+Number of active users
+
+Payment success/failure ratio
+
+Login attempts
+
+These are pushed using Dynatrace’s OneAgent SDK or OpenTelemetry integration.
+
+🔹 3. Custom Business Metrics
+Tracked via custom events for alerting, such as:
+
+High checkout drop-off rate
+
+Surge in refund requests
+
+In some services, we use the Dynatrace Metric API to push domain-specific metrics like order processing time or inventory sync delays.
+
+🔹 4. Synthetic Monitoring Metrics
+Page load times
+
+Availability percentage from various geolocations
+
+Error messages captured during synthetic tests
+
+🔹 5. CI/CD & Deployment Observability
+Deployment frequency and failure rates
+
+Performance degradation post-deployment (automatically flagged by Dynatrace)
+
+We integrate Dynatrace with GitHub Actions and ArgoCD to tag new releases and correlate performance issues with deployments.
+```
