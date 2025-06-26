@@ -432,6 +432,14 @@ sed '1d; $d' filename.txt
 | `1d`       | Delete the **first line** |
 | `$d`       | Delete the **last line**  |
 
+**Jobs without Cronjob**
+
+The at command in shell is used to schedule one-time tasks to run at a specified time. It's like a simpler version of cron for one-off jobs.
+
+Globbing is the term used in Unix/Linux shells for pattern matching using wildcard characters
+
+
+
 
 
 
