@@ -74,3 +74,58 @@ Swap:  1004052k total,     4360k used,   999692k free,   286040k cached
 22442 nagios    24   0  6048 2024 1452 S    8  0.1    0:00.04  check_time.pl
 ```
 
+$iostat 
+```shell
+$ sudo iostat
+Linux 2.6.24-19-server (hostname)   01/31/2009
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           5.73    0.07    2.03    0.53    0.00   91.64
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+sda               9.82       417.96        27.53   30227262    1990625
+sda1              6.55       219.10         7.12   15845129     515216
+sda2              0.04         0.74         3.31      53506     239328
+sda3              3.24       198.12        17.09   14328323    1236081
+```
+
+$iotop
+```shell
+$ sudo iotop
+Total DISK READ: 189.52 K/s | Total DISK WRITE: 0.00 B/s
+
+  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO>     COMMAND
+
+ 8169  be/4  root    189.52 K/s    0.00 B/s  0.00 %  0.00 %     rsync --server --se
+
+ 4243  be/4  kyle      0.00 B/s    3.79 K/s  0.00 %  0.00 %     cli /usr/lib/gnome-
+
+ 4244  be/4  kyle      0.00 B/s    3.79 K/s  0.00 %  0.00 %     cli /usr/lib/gnome-
+
+    1  be/4  root      0.00 B/s    0.00 B/s  0.00 %  0.00 %     init
+```
+
+tps--> transfer per second
+blk-> number of blocks 
+blk_wrtn--> block written 
+When you have a system under heavy I/O load, the first step is to look at each of the partitions and identify which partition is getting the heaviest I/O load
+
+sar -u 2 5
+Reports CPU usage every 2 seconds for 5 samples
+
+| Flag                          | Description                        |
+| ----------------------------- | ---------------------------------- |
+| `-u`                          | CPU usage                          |
+| `-P ALL`                      | CPU usage for each core            |
+| `-r`                          | Memory usage                       |
+| `-B`                          | Paging and swapping stats          |
+| `-b`                          | I/O transfer rates                 |
+| `-d`                          | Block device usage                 |
+| `-n DEV`                      | Network stats per interface        |
+| `-n TCP,UDP`                  | Socket stats                       |
+| `-q`                          | Run queue and load average         |
+| `-W`                          | Swapping stats                     |
+| `-A`                          | All stats (CPU, memory, I/O, etc.) |
+
+
+
+
