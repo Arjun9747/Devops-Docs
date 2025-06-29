@@ -63,3 +63,33 @@ Less community adoption
 Requires dedicated, tuned NICs for DPDK
 No Windows support
 ```
+
+**Felix**
+
+```markdown
+Felix is the primary Calico agent that runs on every node in a Kubernetes cluster. It is responsible for programming the data plane — setting up routes, firewall rules, and policies based on the desired network state.
+
+| Function                             | Description                                                                                                                          |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Policy Enforcement**               | Applies Kubernetes `NetworkPolicy` and Calico-specific policies by programming iptables rules or eBPF maps.                          |
+| **Routing Setup**                    | Adds routes for pod-to-pod and pod-to-external communication, often by programming kernel routing tables (or BPF maps in eBPF mode). |
+| **Interface Management**             | Monitors and programs veth pairs or other interfaces created for pods.                                                               |
+| **Connection to Datastore**          | Watches Kubernetes API (or etcd in standalone mode) to stay updated on endpoints, policies, and configuration.                       |
+| **Workload Endpoint Sync**           | Tracks which pods are on the node, and programs rules accordingly.                                                                   |
+| **Sync with BGP Agent (e.g., BIRD)** | Works with BGP daemons to advertise routes for the pods on its node.                                                                 |
+📉 How Do You Know Felix is Unhealthy?
+✅ Health Checks:
+Liveness & readiness probes (K8s-native)
+
+kubectl get pods -n calico-system -l k8s-app=calico-node
+kubectl describe pod <calico-node-pod>
+
+Calico's node status
+calicoctl node status
+
+Look for:
+State: up for Felix
+Errors in BGP or Felix sections
+
+```
+
