@@ -1,3 +1,4 @@
+```markdown
 🔹 1. Network Connectivity
 Creates Pod-to-Pod networking across nodes using standard routing (no overlay by default).
 Assigns IP addresses to pods and sets up routes.
@@ -23,6 +24,7 @@ Extends beyond Kubernetes (can be used in VMs)
 Handles Service abstraction (ClusterIP, NodePort, LoadBalancer)
 Implements DNAT rules so traffic to a Service gets routed to the correct pod
 Does not control pod-to-pod access or security
+```
 
 
 
