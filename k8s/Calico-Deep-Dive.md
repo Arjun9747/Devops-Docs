@@ -121,5 +121,24 @@ But…
 Your pod-to-pod traffic stays within the underlying VPC MTU
 Cloud VPC MTUs are often 1460–1500 bytes
 AWS: 1500 (but jumbo frames not always supported)
+
+When a Kubernetes cluster spans multiple Layer 2 (L2) domains (i.e., nodes aren't all in the same subnet or broadcast domain), Calico can still handle pod-to-pod communication by leveraging BGP (Border Gateway Protocol).
+
+Kubernetes NetworkPolicy: Namespaced, additive, limited.
+
+Calico GlobalNetworkPolicy: Cluster-wide, layered, prioritized, more expressive.
+
+```
+```markdown
+🔍 What is a Service Account Selector in Calico?
+A serviceAccountSelector is a field in Calico (NetworkPolicy or GlobalNetworkPolicy) that lets you match traffic based on the Kubernetes ServiceAccount attached to a pod, instead of or in addition to using podSelector or namespaceSelector.
+```
+```bash
+spec:
+  ingress:
+  - action: Allow
+    source:
+      serviceAccounts:
+        selector: name == 'frontend-sa'
 ```
 
