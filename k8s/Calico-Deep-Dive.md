@@ -159,3 +159,53 @@ IPv4 BGP status
 
 ```
 
+```markdown
+Pod to Pod error 
+
+Pods on one node can’t reach an external IP—outline your step-by-step triage.	• Which ip route or bpftool commands confirm the dataplane path?
+
+kubectl exec -it <pod> -- curl -v http://8.8.8.8
+kubectl exec -it <pod> -- ping 8.8.8.8
+
+kubectl exec <pod> -- nslookup google.com
+
+🔹 2. Check Pod-to-Node Egress Path
+
+Verify if the Pod’s traffic reaches the node’s uplink.
+
+ip a
+
+# On the node, trace where packets go:
+sudo tcpdump -i <uplink> host 8.8.8.8
+
+🔹 3. Check the Node's NAT Configuration
+
+sudo iptables -t nat -L -n -v | grep -i cali
+sudo iptables-save | grep MASQUERADE
+
+🔹 5. Inspect Calico IPPool Configuration
+calicoctl get ippools -o yaml
+
+Look for
+spec:
+  natOutgoing: true
+
+❌ If natOutgoing: false and you don’t have upstream NAT (e.g., cloud NAT), pod traffic won’t leave the node.
+
+🧪 Real Example (Pod to Internet)
+Imagine a pod with IP 10.42.0.5 on a node with external IP 192.168.1.100.
+
+Without NAT:
+
+MASQUERADE is a form of Source NAT (SNAT) used in iptables to rewrite the source IP address of outbound traffic—typically for traffic going from a private network (like pods) to a public network (like the internet).
+
+Packet goes out with SRC=10.42.0.5
+External server can't reply (it doesn’t know 10.42.0.0/16)
+
+With MASQUERADE:
+Packet goes out as SRC=192.168.1.100
+Reply comes back to the node
+iptables reverses the NAT → sends the packet back to the pod
+
+
+
