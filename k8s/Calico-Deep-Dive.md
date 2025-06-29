@@ -90,6 +90,36 @@ calicoctl node status
 Look for:
 State: up for Felix
 Errors in BGP or Felix sections
+```
 
+**Pod to Pod Networking**
+
+```markdown
+🔹 No Overlay = Native Routing
+Calico uses Layer 3 (L3) routing instead of overlays like VXLAN or IPIP. In pure L3 mode:
+
+Each pod is assigned a real routable IP address (no NAT).
+
+Calico programs static routes or uses BGP (Border Gateway Protocol) to share routes between nodes.
+
+Traffic flows directly between nodes — pod-to-pod — using native IP routing, no encapsulation.
+
+🔧 What Enables It?
+Calico's BGP agent (calico/node) runs on each node.
+It announces pod CIDRs for each node to the rest of the cluster.
+These are installed as host routes in the kernel routing table.
+
+🧠 Result:
+No encapsulation → lower latency, better throughput, easier to debug
+True end-to-end IP visibility
+
+When Calico doesn't use an overlay, it avoids tunneling overhead, so you get the full MTU (Maximum Transmission Unit) of the network.
+
+But…
+
+⚠️ You must ensure:
+Your pod-to-pod traffic stays within the underlying VPC MTU
+Cloud VPC MTUs are often 1460–1500 bytes
+AWS: 1500 (but jumbo frames not always supported)
 ```
 
