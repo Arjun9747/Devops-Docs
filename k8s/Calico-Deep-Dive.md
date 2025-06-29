@@ -142,8 +142,6 @@ spec:
         selector: name == 'frontend-sa'
 ```
 ```
-
-```markdown
 Typha is a horizontal scalability component in Calico, designed to reduce the load on the Kubernetes API server and the Calico felix agents on each node—especially in large-scale clusters.
 
 ```bash
