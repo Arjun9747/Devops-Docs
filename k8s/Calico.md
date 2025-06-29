@@ -1,5 +1,17 @@
 Calico is a networking (security) solutions for K8s. It provides networking, n/w policy enforcement and IP addr mgmt using standard Linux networking tools. 
 
+**Existing Policies**
+Calico global Network Polciies 
+
+allow communication between same namespace 
+all workloads can dissolve dns name 
+ensure dns queries to kube-system (where core dns runs) are always permitted regardless of their network polcies
+all unmatched traffic will be logged 
+
+**Gatekeeper Policies** 
+
+Pull container images from private registry without manual interventions 
+
 **How Calico Works?**
 
 1. CNI Integration: Calico configures networking when pods starts using CNI specification. 
