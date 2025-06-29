@@ -141,4 +141,23 @@ spec:
       serviceAccounts:
         selector: name == 'frontend-sa'
 ```
+```
+
+```markdown
+Typha is a horizontal scalability component in Calico, designed to reduce the load on the Kubernetes API server and the Calico felix agents on each node—especially in large-scale clusters.
+
+```bash
+calicoctl node status
+
+Calico process is running.
+
+IPv4 BGP status
++----------------+-------------------+-------+----------+-------------+
+|  Peer address  |     Peer type     | State |  Since   |     Info    |
++----------------+-------------------+-------+----------+-------------+
+| 192.168.1.1    | node-to-node mesh | up    | 00:10:12 | Established |
+| 192.168.1.2    | node-to-node mesh | up    | 00:10:14 | Established |
++----------------+-------------------+-------+----------+-------------+
+
+```
 
