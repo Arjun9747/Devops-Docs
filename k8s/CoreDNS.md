@@ -64,6 +64,9 @@ Query: www.google.com
 
 Handled by: .:53 block → forwarded to upstream DNS (like 8.8.8.8) via forward plugin
 
+“The coredns ConfigMap in the kube-system namespace defines how CoreDNS handles DNS requests inside the Kubernetes cluster. It contains a Corefile, which is the actual configuration file read by the CoreDNS service. This file specifies plugins and directives that control how service and pod names are resolved, how external DNS is forwarded, and how metrics, caching, and health checks are handled.”
+
+
 
 
 
