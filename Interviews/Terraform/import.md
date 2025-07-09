@@ -96,6 +96,10 @@ After creating an EC2 instance, run a script to register it in an external CMDB 
 
  Trigger a rebuild script when the app version changes.
 
+A data source in Terraform allows you to fetch existing infrastructure details from a provider (like AWS, Azure, GCP, etc.) without managing it.
+
+
+
 ```
 
  # Modules
@@ -106,7 +110,6 @@ After creating an EC2 instance, run a script to register it in an external CMDB 
 | **Child Module** | A reusable module called by the root or another module   |
 
 
-```
 | Feature         | Timing               | Scope             | Purpose                                |
 | --------------- | -------------------- | ----------------- | -------------------------------------- |
 | `precondition`  | Before apply         | Inside resource   | Validate inputs or expressions         |
