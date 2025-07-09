@@ -98,7 +98,10 @@ After creating an EC2 instance, run a script to register it in an external CMDB 
 
 A data source in Terraform allows you to fetch existing infrastructure details from a provider (like AWS, Azure, GCP, etc.) without managing it.
 
-
+taint --> force recreation 
+Refactor --> to move resources inside or outside of modules {moved.tf}
+untracking --> remove a resource from terraform configuration without actually destroying that resource
+Generating Configraution --> Generate configuration based on existing resources 
 
 ```
 
