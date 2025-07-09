@@ -52,6 +52,7 @@ Terraform's dynamic block is used to generate nested blocks programmatically bas
 Let’s say you want to define multiple ingress rules in a security group dynamically based on a list of CIDRs or ports.
 
 Meta-arguments in Terraform are special arguments you can use in any resource block to change its behavior.
+```
 
 | Meta-Argument | Description                                         |
 | ------------- | --------------------------------------------------- |
@@ -60,6 +61,8 @@ Meta-arguments in Terraform are special arguments you can use in any resource bl
 | `count`       | Create multiple resource instances dynamically      |
 | `for_each`    | Create multiple resources from a map or set         |
 | `lifecycle`   | Control how Terraform creates, updates, and deletes |
+
+```markdown
 
 # Terraform Refresh
 
@@ -74,6 +77,7 @@ Use terraform apply -refresh-only to only update state, not resources
 # Provisoners
 
 Provisioners in Terraform are used to execute scripts or commands on a local machine or on a remote resource after it's created. They're mainly used for bootstrapping, configuration, or custom post-deployment actions.
+```
 
 | Type            | Description                                          |
 | --------------- | ---------------------------------------------------- |
@@ -82,6 +86,8 @@ Provisioners in Terraform are used to execute scripts or commands on a local mac
 | `file`          | Copies files **from local to remote**                |
 | `null_resource` | A meta-resource used **with provisioners**           |
 
+```markdown
+
 # Null Resources 
 
 The null_resource is a meta-resource in Terraform that allows you to execute scripts or actions without managing actual infrastructure.
@@ -89,6 +95,8 @@ The null_resource is a meta-resource in Terraform that allows you to execute scr
 After creating an EC2 instance, run a script to register it in an external CMDB or monitoring tool.
 
  Trigger a rebuild script when the app version changes.
+
+```
 
  # Modules
 
