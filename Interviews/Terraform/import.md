@@ -37,6 +37,23 @@ variable "env" {
   default = terraform.workspace
 }
 
+# locals
+
+locals in Terraform are used to define named values that you can reuse throughout your configuration.
+They help reduce repetition and improve readability, maintainability, and logic abstraction
+
+Locals are evaluated at plan time, and cannot change between applies.
+
+Use for Tag Management
+
+# dynamic blocks
+
+Terraform's dynamic block is used to generate nested blocks programmatically based on loops or conditions—especially when the number or content of nested blocks isn't fixed.
+
+Let’s say you want to define multiple ingress rules in a security group dynamically based on a list of CIDRs or ports.
+
+
+
 
 
 ```
