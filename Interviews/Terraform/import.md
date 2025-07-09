@@ -17,7 +17,7 @@ import {
   id = "deltastates3"
 }
 
-#workspace
+# Workspace
 
 Terraform workspaces allow you to use the same Terraform configuration to manage multiple environments or copies of infrastructure, like dev, staging, and prod.
 
@@ -30,7 +30,7 @@ terraform workspace list
 
 terraform workspace select dev
 
-#Pass as variable
+# Pass as variable
 
 variable "env" {
   type    = string
