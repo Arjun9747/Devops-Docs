@@ -82,6 +82,21 @@ Provisioners in Terraform are used to execute scripts or commands on a local mac
 | `file`          | Copies files **from local to remote**                |
 | `null_resource` | A meta-resource used **with provisioners**           |
 
+# Null Resources 
+
+The null_resource is a meta-resource in Terraform that allows you to execute scripts or actions without managing actual infrastructure.
+
+After creating an EC2 instance, run a script to register it in an external CMDB or monitoring tool.
+
+ Trigger a rebuild script when the app version changes.
+
+ # Modules
+
+ | Module Type      | Description                                              |
+| ---------------- | -------------------------------------------------------- |
+| **Root Module**  | The main configuration directory where you run Terraform |
+| **Child Module** | A reusable module called by the root or another module   |
+
 
 ```
 | Feature         | Timing               | Scope             | Purpose                                |
@@ -90,10 +105,4 @@ Provisioners in Terraform are used to execute scripts or commands on a local mac
 | `postcondition` | After resource apply | Inside resource   | Ensure real resource state correctness |
 | `check`         | After apply          | Outside resources | Validate overall system state          |
 
-# Null Resources 
 
-The null_resource is a meta-resource in Terraform that allows you to execute scripts or actions without managing actual infrastructure.
-
-After creating an EC2 instance, run a script to register it in an external CMDB or monitoring tool.
-
- Trigger a rebuild script when the app version changes.
