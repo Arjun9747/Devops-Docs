@@ -17,3 +17,8 @@ import {
   id = "deltastates3"
 }
 ```
+| Feature         | Timing               | Scope             | Purpose                                |
+| --------------- | -------------------- | ----------------- | -------------------------------------- |
+| `precondition`  | Before apply         | Inside resource   | Validate inputs or expressions         |
+| `postcondition` | After resource apply | Inside resource   | Ensure real resource state correctness |
+| `check`         | After apply          | Outside resources | Validate overall system state          |
