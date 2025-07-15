@@ -75,7 +75,10 @@ Alerting UI (if enabled)
 ✅ 10. blackbox-exporter or other exporters (optional)
 
 For monitoring external endpoints (HTTP, TCP, etc.)
-```
+
+To install and integrate Grafana in EKS, the most common and production-ready method is using the Helm chart from the kube-prometheus-stack or standalone Grafana Helm chart.
 
 Not default — added manually
 What it is: One per node, exporting system metrics.
+```
+
