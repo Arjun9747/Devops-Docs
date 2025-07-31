@@ -34,3 +34,5 @@ For jobs:
 We will call a reuseble repository --> where we can pass parameters like app-name , chart path, component test , runners group 
 
 the workflow will be called from other workflow using (workflow_call) to automate linting, versioning and provide release information 
+
+A composite action in GitHub Actions is a custom reusable action built using multiple steps (like shell commands or other actions). It lets you group common logic (like setup, build, test) into one reusable unit — similar to a function or module in programming.
