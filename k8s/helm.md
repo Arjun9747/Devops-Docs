@@ -28,7 +28,7 @@ apps/
 helm create myapp
 This creates a directory structure like this:
 
-bash
+```bash
 Copy
 Edit
 myapp/
@@ -40,6 +40,7 @@ myapp/
 │   └── ...
 ├── Chart.yaml               # Metadata about the chart
 ├── values.yaml              # Default configuration values
+```
 
 Chart.yaml defines metadata like chart name, version, etc.
 values.yaml to Define Default Values
@@ -47,13 +48,14 @@ values.yaml to Define Default Values
 4. Modify templates/deployment.yaml with Template Syntax
 Use Helm templating ({{ }}) to inject values from values.yaml:
 
-yaml
+```yaml
 Copy
 Edit
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "myapp.fullname" . }}
+```
 
 
 
