@@ -147,6 +147,16 @@ You use GitHub-hosted runners for:
 • Running security tools (e.g., Prisma, Checkov) on private IaC
 • Jobs requiring VPN, VPC, secret vaults, or on-prem databases
 Custom tools or build environments not available on GitHub-hosted runners
+
+DORA stands for DevOps Research and Assessment.
+
+| Metric                       | Description                                               | Goal for Elite Teams     |
+| ---------------------------- | --------------------------------------------------------- | ------------------------ |
+| **1. Deployment Frequency**  | How often you deploy code to production                   | Multiple deploys per day |
+| **2. Lead Time for Changes** | Time from code commit to successful production deployment | Less than 1 day          |
+| **3. Change Failure Rate**   | % of deployments causing failure in production            | < 15%                    |
+| **4. Mean Time to Recovery** | Time it takes to restore service after a failure          | Less than 1 hour         |
+
 ```
 
 
