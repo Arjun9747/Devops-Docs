@@ -256,6 +256,8 @@ They can’t list, create, or delete anything in prod
 
 Even if they try: kubectl get pods -n prod → ❌ Forbidden
 
+```markdown
+
 # Redis 
 
 Create a Namespace for Redis 
@@ -276,6 +278,7 @@ Services
 
 Headless services for network identity and DNS within statefulset 
 master and replica service to expose the port to 6379 
+clusterip: none 
 
 # Stateful sets
 
@@ -295,7 +298,25 @@ use sa, cm, secret and storage
 # Volumes 
 
 configmaps are mounted
-emptyfir for temporary storage 
+emptyfir for temporary storage
+```
+
+```markdown
+
+PV contains storage, accessmode, hostpath
+
+PVC matches access mode, size, storage class (manual)
+
+Pod → PVC → StorageClass → CSI Driver → Storage Backend
+Pod requests storage via a PersistentVolumeClaim
+
+PVC refers to a StorageClass
+
+The StorageClass uses a CSI driver
+
+CSI driver provisions storage from a backend
+
+
 
 
 
