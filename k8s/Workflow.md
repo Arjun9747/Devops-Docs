@@ -292,7 +292,9 @@ Persistence storage 8Gi is attached for durability
 # Replica-statefulset 
 
 Deploy one replica pod 
-connect to master for replication 
+connect to master for replication
+args: ["--replicaof", "redis-0.redis.default.svc.cluster.local", "6379"]
+By specifying these args, the Redis container will start in replica mode, replicating data from the master instance at redis-0.redis.default.svc.cluster.local:6379
 use sa, cm, secret and storage 
 
 # Volumes 
