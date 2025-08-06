@@ -256,6 +256,49 @@ They can’t list, create, or delete anything in prod
 
 Even if they try: kubectl get pods -n prod → ❌ Forbidden
 
+# Redis 
+
+Create a Namespace for Redis 
+
+Create a SA for pods to interact with K8s API 
+
+Store Redis password as base-64 encoded for using opaque type 
+
+Config-maps configuration 
+Persistence is enabled --> appendonly yes 
+RDS persistence is disabled 
+disable flshubdb , flushalldb are renamed to empty strings for saftey 
+
+Healthscript for livness and readiness probe 
+startupscript to used as a entrypoint to start redis master 
+
+Services
+
+Headless services for network identity and DNS within statefulset 
+master and replica service to expose the port to 6379 
+
+# Stateful sets
+
+Master Statefulset
+
+Deploy one redis masterpod
+use SA, CM, secret, storage volume , 
+health and readiness probe are defined using custom scripts 
+Persistence storage 8Gi is attached for durability 
+
+# Replica-statefulset 
+
+Deploy one replica pod 
+connect to master for replication 
+use sa, cm, secret and storage 
+
+# Volumes 
+
+configmaps are mounted
+emptyfir for temporary storage 
+
+
+
 
 
 
