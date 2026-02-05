@@ -438,6 +438,16 @@ The at command in shell is used to schedule one-time tasks to run at a specified
 
 Globbing is the term used in Unix/Linux shells for pattern matching using wildcard characters
 
+**Find all files > 10 MB Show human-readable sizes Write output to size.txt**
+```bash
+find . -type f -size +10M -exec du -h {} + > size.txt
+```
+find . → search from current directory
+-type f → only files (no directories)
+-size +10M → files larger than 10 MB
+du -h → disk usage in human-readable format (KB, MB, GB)
+> size.txt → write output to a text file
+
 
 
 
