@@ -72,6 +72,20 @@
 
 Istio Ambient Mesh is a new architecture introduced by the Istio project to offer sidecar-less service mesh capabilities. It provides the same key benefits of Istio (like traffic control, observability, and security), without requiring sidecar proxies (like Envoy) to be injected into every pod.
 
+A VirtualService defines how traffic is routed to a service based on conditions like:
+
+URL path
+
+Headers
+
+Hostname
+
+Percentage of traffic
+
+Source
+
+This is useful for traffic management, canary releases, A/B testing, and blue-green deployments.
+
 
 
 
