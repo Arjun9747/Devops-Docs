@@ -123,5 +123,11 @@ Use envsubst to Substitute Env Vars in a Template File
 | Dynamic rendering           | Use `helm template` with `--set` in CI/CD     |
 
 
+Helm processes multiple values files in the order provided using -f. The values from later files override earlier ones. The file names like dev, prod, or test do not matter—only the order in the command determines precedence.
 
+Scenario 
+
+We use multiple values.yaml files in Helm when we want to override configuration for different environments or contexts without modifying the main chart.
+
+Multiple values.yaml files in Helm are used to manage environment-specific or deployment-specific configurations. For example, a base configuration can be overridden by dev, test, or production values files, allowing the same Helm chart to be reused across different environments without modifying the chart itself.
 
