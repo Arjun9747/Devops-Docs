@@ -1,4 +1,8 @@
-# CI/CD Pipeline Overview## End-to-End Flow DiagramShow more lines
+# CI/CD Pipeline Overview
+
+## End-to-End Flow Diagram
+
+```
 Developer
 ↓
 GitHub Commit
@@ -28,9 +32,11 @@ EKS Cluster
 Grafana Monitoring
 ↓
 Automatic Rollback (if needed)
+```
 
-```md
-## Technology Stack
+---
+
+# Technology Stack
 
 - **SCM:** GitHub  
 - **CI/CD Engine:** GitHub Actions  
@@ -42,206 +48,328 @@ Automatic Rollback (if needed)
 - **Code Quality:** SonarQube  
 - **Container Security:** Trivy, Prisma Cloud  
 
-Markdown# 1. Developer Commit Stage (Trigger)### What happens- Developer commits/pushes code to GitHub repo.- GitHub Actions workflow triggers on:  - `push`  - `pull_request`  - `tag`Show more lines
-Markdown# 2. Dependency Install Stage### Example```bashmvn clean install -DskipTestsShow more lines
-What happens
+---
 
-Dependencies downloaded
-Libraries resolved
-Build structured prepared
+# 1. Developer Commit Stage (Trigger)
 
-Best Practices
+## What Happens
 
-Use dependency caching
-Use private repo (Artifactory)
+- Developer commits or pushes code to GitHub repository.
+- GitHub Actions workflow triggers on:
 
+```
+push
+pull_request
+tag
+```
 
-```md
+---
+
+# 2. Dependency Install Stage
+
+## Example
+
+```bash
+mvn clean install -DskipTests
+```
+
+## What Happens
+
+- Dependencies downloaded
+- Libraries resolved
+- Build structure prepared
+
+## Best Practices
+
+- Use dependency caching
+- Use private repository (Artifactory)
+
+---
+
 # 3. Static Code Analysis (SonarQube)
 
-### Pipeline Command
+## Pipeline Command
+
 ```bash
 mvn sonar:sonar
+```
 
-Checks Performed
+## Checks Performed
 
-Code smells
-Bugs
-Vulnerabilities
-Duplications
-Technical debt
+- Code smells
+- Bugs
+- Vulnerabilities
+- Duplications
+- Technical debt
 
-Quality Gate Rules
+## Quality Gate Rules
 
-Coverage < 80% → FAIL
-Critical vulnerabilities > 0 → FAIL
+- Coverage < 80% → **FAIL**
+- Critical vulnerabilities > 0 → **FAIL**
 
+---
 
-```md
 # 4. License & Dependency Checks
 
-### Tools Used
-- Maven dependency-check  
-- SCA scanners  
+## Tools Used
 
-### Checks
-- License validation  
-- CVE detection  
+- Maven dependency-check
+- SCA scanners
 
-### Sample Risks
-- Log4j  
-- GPL-restricted software  
-- Outdated versions  
+## Checks
 
-### Best Practice
-Fail on **HIGH** CVEs.  
+- License validation
+- CVE detection
 
-Markdown# 5. Unit Testing Stage### Example```bashmvn testShow more lines
-Frameworks
+## Sample Risks
 
-JUnit
-Mockito
+- Log4j
+- GPL restricted software
+- Outdated versions
 
-Metrics
+## Best Practice
 
-Coverage
-Pass/Fail summary
+Fail on **HIGH CVEs**
 
-Best Practice
-Coverage ≥ 80%.
+---
 
-```md
+# 5. Unit Testing Stage
+
+## Example
+
+```bash
+mvn test
+```
+
+## Frameworks
+
+- JUnit
+- Mockito
+
+## Metrics
+
+- Test coverage
+- Pass / Fail summary
+
+## Best Practice
+
+Coverage ≥ **80%**
+
+---
+
 # 6. Build Artifact Stage
 
-### Build Command
+## Build Command
+
 ```bash
 mvn package
+```
 
-Output
+## Output
+
+```
 target/app.jar
+```
 
-Storage
+## Storage
 
-Pushed to JFrog Artifactory
+Artifact pushed to **JFrog Artifactory**
 
-Benefits
+## Benefits
 
-Versioning
-Central repository
-Reproducible builds
+- Versioning
+- Central repository
+- Reproducible builds
 
+---
 
-```md
 # 7. Docker Image Build
 
-### Example Dockerfile
-```Dockerfile
+## Example Dockerfile
+
+```dockerfile
 FROM openjdk:17-jdk
 COPY target/app.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
+```
 
-Build Command
-Shelldocker build -t app:1.4.0 .Show more lines
+## Build Command
 
-```md
+```bash
+docker build -t app:1.4.0 .
+```
+
+---
+
 # 8. Container Security Scanning
 
-### Tools
-- Trivy  
-- Prisma Cloud  
+## Tools
 
-### Example Scan
+- Trivy
+- Prisma Cloud
+
+## Example Scan
+
 ```bash
 trivy image app:1.4.0
+```
 
-Checks For
+## Checks For
 
-OS vulnerabilities
-Library CVEs
-Secrets
+- OS vulnerabilities
+- Library CVEs
+- Secrets
 
-Rule
-Critical CVEs > 0 → FAIL
+## Rule
 
-```md
+Critical CVEs > 0 → **FAIL**
+
+---
+
 # 9. Push Docker Image to Registry
 
-### Target
-- Artifactory Docker Registry  
+## Target
 
-### Tags
-- app:1.4.0  
-- app:latest  
-- app:${GIT_SHA}  
+- Artifactory Docker Registry
 
-### Best Practice
-Use immutable tags.  
+## Tags
 
-Markdown# 10. Integration Testing### Types- API tests  - DB integration tests  - Service connectivity tests  ### Tools- Postman  - REST Assured  - TestContainers  Show more lines
-Markdown# 11. Helm Packaging### Chart StructureShow more lines
+```
+app:1.4.0
+app:latest
+app:${GIT_SHA}
+```
+
+## Best Practice
+
+Use **immutable tags**
+
+---
+
+# 10. Integration Testing
+
+## Types
+
+- API tests
+- Database integration tests
+- Service connectivity tests
+
+## Tools
+
+- Postman
+- REST Assured
+- TestContainers
+
+---
+
+# 11. Helm Packaging
+
+## Chart Structure
+
+```
 charts/
-deployment.yaml
-service.yaml
-values.yaml
+  deployment.yaml
+  service.yaml
+  values.yaml
+```
 
-### Example Values
+## Example Values
+
 ```yaml
 image:
   repository: artifactory/app
   tag: "1.4.0"
+```
 
+---
 
-```md
 # 12. Deployment to EKS
 
-### Command
+## Command
+
 ```bash
 helm upgrade --install app ./chart
+```
 
-Deploys
+## Deploys
 
-Deployment
-Service
-ConfigMaps
-Secrets
-HPA
+- Deployment
+- Service
+- ConfigMaps
+- Secrets
+- HPA
 
+---
 
-```md
 # 13. Deployment Strategies
 
 ## Blue-Green Deployment
-- Blue = Current  
-- Green = New  
-- Traffic switch after validation  
+
+- Blue = Current environment
+- Green = New environment
+- Traffic switched after validation
 
 ## Canary Deployment
+
 Gradual rollout:
-- 10% → 50% → 100%  
 
-Tools:
-- Istio  
-- Argo Rollouts  
+```
+10% → 50% → 100%
+```
 
-Markdown# 14. Health Checks### Liveness ProbeEnsures container is alive.### Readiness ProbeEnsures pod ready for traffic.``Show more lines
-Markdown# 15. Rollback Strategy### Trigger on:- Failed health checks  - High error rate  - Canary failure  ### Command```bashhelm rollback app 3Show more lines
+## Tools
 
-```md
+- Istio
+- Argo Rollouts
+
+---
+
+# 14. Health Checks
+
+## Liveness Probe
+
+Ensures container is **alive**
+
+## Readiness Probe
+
+Ensures pod is **ready to receive traffic**
+
+---
+
+# 15. Rollback Strategy
+
+## Trigger On
+
+- Failed health checks
+- High error rate
+- Canary failure
+
+## Command
+
+```bash
+helm rollback app 3
+```
+
+---
+
 # 16. Monitoring & Observability
 
-### Tools
-- Grafana  
-- Prometheus  
-- CloudWatch  
+## Tools
 
-### Metrics
-- CPU  
-- Memory  
-- Latency  
-- Error rate  
-- Pod restarts  
+- Grafana
+- Prometheus
+- CloudWatch
 
-### Alerts
-- Error rate > 5%  
-- Crash loops  
-- High latency  
+## Metrics
+
+- CPU
+- Memory
+- Latency
+- Error rate
+- Pod restarts
+
+## Alerts
+
+- Error rate > 5%
+- Crash loops
+- High latency
