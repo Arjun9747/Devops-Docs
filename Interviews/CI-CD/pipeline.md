@@ -1,5 +1,4 @@
-🔥 COPY FROM BELOW
-Shell# CI/CD Pipeline Overview## End-to-End Flow DiagramShow more lines
+# CI/CD Pipeline Overview## End-to-End Flow DiagramShow more lines
 Developer
 ↓
 GitHub Commit
